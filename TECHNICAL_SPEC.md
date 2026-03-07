@@ -85,7 +85,20 @@ Users can export their project in three distinct formats:
 -   **Pure React:** A set of organized React components (`.tsx` files) for web projects.
 -   **Hybrid Component:** A self-contained SwiftUI View that wraps a `WKWebView` pointing to the generated React code. This component can be dropped into any existing native iOS project, allowing the React portion to handle its own backend service connections independently.
 
-### 4.3. AI-Powered Inputs
+### 4.3. Voice Input UI Design
+
+The voice input interface is a critical part of the experience and must feel natural, elegant, and non-intrusive. The design is platform-specific:
+
+**iPad:**
+The voice input is represented as a small, floating **Liquid Glass orb** — a soft, translucent blob that sits in a corner of the screen (user-repositionable). It is always accessible without taking over the screen. When the user speaks, the orb morphs and reacts to the audio input with subtle, organic animations. When the AI responds, it can either speak back (audio output) or display a clean, elegant text blurb near the orb. If the AI needs confirmation or presents a yes/no decision, it surfaces a minimal approval UI near the orb — not a full-screen modal. The orb is the user's always-present creative partner, not a disruptive overlay.
+
+**iPhone:**
+The iPhone's smaller screen cannot accommodate a persistent floating orb alongside the content. Instead, the voice input is a dedicated screen/mode. The user taps the voice button (or activates via a gesture) and enters a **voice-first screen** where they simply talk. The screen shows a minimal waveform or Liquid Glass animation reacting to their voice. The AI's responses appear as text on this screen. When the user is done talking, they swipe or tap to return to the main view, where the AI's work is already reflected. This is designed for the "pacing and talking" workflow — the user is walking around, describing ideas, and the app is building in the background. They check the results when they're ready.
+
+**Mac:**
+Similar to iPad. The Liquid Glass orb sits in a corner of the window. The Mac version may also support a keyboard shortcut to activate voice input without clicking.
+
+### 4.4. AI-Powered Inputs
 
 -   **Voice-to-UI:** Leveraging the `FoundationModels` framework, users can describe UI layouts and components in natural language (e.g., "Create a login screen with a logo, two text fields, and a button"). The AI writes the code; the user sees the result.
 -   **Image-to-UI:** Using `VisionKit` and the multimodal capabilities of the on-device model, users can take a picture of a hand-drawn sketch or a whiteboard wireframe, and the app will generate the corresponding UI code.
@@ -140,7 +153,16 @@ Any individual Component, Preset, or Composition can be exported independently, 
 
 While working inside an App project, a user can long-press (or right-click on Mac) any element or group of elements on the canvas and select "Save as Component" from the context menu. This promotes the selection to the user's global Component Library, extracting it from the project it was created in. From that point forward, the Component is available in the Object Library for use in any other project. The user can then create Presets of it, nest it inside Compositions, or export it independently. The workflow is: build it once, save it, reuse it forever. No element should ever be "trapped" inside a single project.
 
-### 5.7. Platform Starter Templates
+### 5.7. Auto-Sort & AI-Managed Organization
+
+Imported assets and created components can be automatically organized by the AI. The user does not need to manually sort files into folders. They can simply tell the AI: "Keep this in this project" or "Put this in my global library" and the AI handles the rest. The auto-sort system will:
+
+-   Automatically categorize imported assets (images, icons, fonts) into logical folders within the project.
+-   Detect when a component is project-specific vs. reusable and suggest promoting it to the global Object Library.
+-   Allow the user to override any automatic organization decision via voice or text (e.g., "Move that button to my global components").
+-   Keep the project file structure clean without requiring the user to think about folder hierarchies.
+
+### 5.8. Platform Starter Templates
 
 When creating a new Component, the user can start from a blank canvas or from a platform-specific starter template. Templates will be provided for common UIKit elements (Button, TableViewCell, NavigationBar), SwiftUI views (NavigationStack, List, TabView), and React components (Card, Modal, Form). The template provides the base structure and standard properties; the user customizes from there using the visual controls.
 
