@@ -246,7 +246,32 @@ Performance is a first-class requirement, not an afterthought. The application w
 -   **Simulation:** The Live Simulation Environment must run at native frame rates with no dropped frames during animation previews.
 -   **Memory:** The app must be aggressive about memory management, especially on iPhone and iPad where resources are more constrained. Large projects must use lazy loading and virtualization for off-screen components.
 
-## 12. Persistent Technical Documentation Requirement
+## 12. Future: Spatial Computing & WebXR (Stretch Goal)
+
+This is a future feature, not part of the initial build. It is documented here so the architecture does not preclude it.
+
+### 12.1. WebXR for Meta Quest
+
+Since CanvasCode already produces React code, it is a natural extension to support **WebXR** output. WebXR is a standard web API that enables immersive VR/AR experiences in a browser. A React project built in CanvasCode could be extended with WebXR components (using libraries like `react-three-fiber` and `@react-three/xr`) to create spatial experiences that run in the Meta Quest browser. This would support:
+
+-   Hand tracking (Quest native)
+-   Controller input
+-   3D spatial UI layouts
+-   Immersive and passthrough AR modes
+
+The user would build the spatial UI in CanvasCode, export as React, and run it on Quest via the browser. No Meta SDK or native Quest development required.
+
+### 12.2. visionOS for Apple Vision Pro
+
+For Vision Pro, the path is native. SwiftUI already supports spatial computing via `RealityKit`, `RealityView`, and visionOS-specific APIs (windows, volumes, immersive spaces). A SwiftUI project built in CanvasCode could be extended with spatial components and exported as a visionOS Xcode project.
+
+> **RESEARCH FLAG FOR DEVELOPING AGENT:** Investigate whether visionOS apps can be built and deployed directly from an iPad or must go through Xcode on a Mac. The M5 chip in the Vision Pro may enable on-device development in the future. If Apple opens this up, CanvasCode running on Vision Pro itself could become a spatial development environment. Monitor WWDC announcements.
+
+### 12.3. Cross-Platform Spatial
+
+The ultimate vision is: design a spatial UI once in CanvasCode, export as WebXR (React) for Quest, or as native SwiftUI + RealityKit for Vision Pro. Same design, two spatial platforms. This is a long-term goal.
+
+## 13. Persistent Technical Documentation Requirement
 
 > **MANDATORY: The developing agent MUST maintain a living technical knowledge document in this repository. This document MUST be updated with every iteration, every commit, every discovery.**
 
