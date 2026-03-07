@@ -17,7 +17,7 @@ It is designed from the ground up to be a showcase for Apple's on-device intelli
 -   **AI-Native & On-Device First:** The application's intelligence is powered by Apple's Foundation Models, running directly on the user's device. This ensures privacy, speed, and offline capability. Cloud-based models (like ChatGPT) are available as an optional, explicitly-disclosed alternative.
 -   **Ethical AI Positioning:** The app will transparently communicate the benefits of on-device processing (privacy, efficiency, lower carbon footprint) versus cloud-based models, empowering users to make an informed choice.
 -   **Seamless Cross-Platform Experience:** Projects are synced via iCloud and the experience is tailored to the strengths of each device (iPhone, iPad, Mac), with deep integration of Apple's Continuity features.
--   **Self-Extensible System (JARVIS Core):** The CanvasCode engine will be a core competency of the JARVIS system, allowing JARVIS to programmatically design and generate UIs for its own modules and tools.
+-   **Self-Extensible System:** The CanvasCode engine is designed to be modular and programmable, enabling future integration with automation systems and external tooling.
 
 ## 3. Development Priority & Platform Strategy
 
@@ -189,12 +189,12 @@ The best way to understand CanvasCode's relationship to the user is to think of 
 
 CanvasCode follows the same model. The user describes, the AI builds, and the result lives locally on the device and in iCloud. It never leaves the user's ecosystem unless they choose to export to Xcode, deploy to a web host, or share via an iCloud link. The key difference from Manus is that CanvasCode is native, on-device, private, and powered by Apple's Foundation Models — not a cloud service. The user's data and creations stay on their hardware at all times.
 
-## 7. JARVIS Core Integration
+## 7. Programmatic API & Automation
 
-CanvasCode will not be just a standalone app; its engine will be a fundamental, extensible component of the JARVIS system.
+CanvasCode will not be just a standalone app; its engine will be designed as a modular, programmable system.
 
--   **Programmatic UI Generation:** JARVIS will have an internal API to access the CanvasCode engine. This will allow JARVIS to dynamically generate user interfaces for its own modules, create new ad-hoc tools, or even modify its own settings UI.
--   **Self-Modification:** This creates a powerful feedback loop where JARVIS can design, build, and deploy new versions of its own tools and interfaces in response to user needs or system changes.
+-   **Programmatic UI Generation:** CanvasCode will expose an internal API that allows external automation systems to programmatically generate user interfaces, create new ad-hoc tools, or modify existing layouts.
+-   **Extensibility:** This creates a powerful foundation where automated workflows can design, build, and iterate on UI components without manual intervention.
 
 ## 8. Architectural Clarifications
 
