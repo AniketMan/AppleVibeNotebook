@@ -245,3 +245,20 @@ Performance is a first-class requirement, not an afterthought. The application w
 -   **AI Inference:** On-device Foundation Model inference must not block the main thread. All AI operations will run asynchronously with clear progress indication.
 -   **Simulation:** The Live Simulation Environment must run at native frame rates with no dropped frames during animation previews.
 -   **Memory:** The app must be aggressive about memory management, especially on iPhone and iPad where resources are more constrained. Large projects must use lazy loading and virtualization for off-screen components.
+
+## 12. Persistent Technical Documentation Requirement
+
+> **MANDATORY: The developing agent MUST maintain a living technical knowledge document in this repository. This document MUST be updated with every iteration, every commit, every discovery.**
+
+The file shall be named `TECHNICAL_KNOWLEDGE_BASE.md` and shall live in the root of the repository. Its purpose is to capture every piece of technical knowledge gained during development, including but not limited to:
+
+-   **Apple Framework Behaviors:** Any undocumented behavior, quirk, limitation, or capability discovered while working with Foundation Models, VisionKit, SwiftUI, WKWebView, Continuity APIs, iCloud, Core Bluetooth, or any other Apple framework.
+-   **API Patterns:** Effective patterns for calling Foundation Models, structuring `@Generable` types, defining `Tool` protocol conformances, handling async inference, managing adapters.
+-   **Code Architecture Decisions:** Why a particular architecture was chosen, what alternatives were considered, and what tradeoffs were made.
+-   **Performance Findings:** Benchmarks, profiling results, memory usage patterns, rendering performance data, and any optimizations discovered.
+-   **Platform Differences:** Any behavioral differences between iPhone, iPad, and Mac that affect shared code.
+-   **WKWebView & React Integration:** Everything learned about bundling React apps locally, JavaScript bridge communication, performance characteristics, and limitations.
+-   **Build & Export Pipeline:** How the Xcode project export works, what files are generated, how the React export is structured, how the hybrid component is assembled.
+-   **Errors & Solutions:** Every significant error encountered and how it was resolved. This is a debugging reference.
+
+This document is a **living knowledge base**. It is not a changelog. It is not release notes. It is a comprehensive, searchable, structured reference of everything the developing agent has learned about building this application. It must be treated with the same importance as the codebase itself. If a piece of knowledge is not in this document, it may as well not exist.
