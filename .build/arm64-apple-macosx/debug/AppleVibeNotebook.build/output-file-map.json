@@ -1,0 +1,138 @@
+{
+  "": {
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/master.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/CodeGen/SwiftSyntaxCodeGenerator.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SwiftSyntaxCodeGenerator.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SwiftSyntaxCodeGenerator.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SwiftSyntaxCodeGenerator~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SwiftSyntaxCodeGenerator.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SwiftSyntaxCodeGenerator.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/ConversionReport/ConversionReport.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ConversionReport.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ConversionReport.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ConversionReport~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ConversionReport.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ConversionReport.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/IR/IntermediateRepresentation.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/IntermediateRepresentation.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/IntermediateRepresentation.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/IntermediateRepresentation~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/IntermediateRepresentation.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/IntermediateRepresentation.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Mappings/ComponentMapping.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ComponentMapping.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ComponentMapping.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ComponentMapping~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ComponentMapping.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ComponentMapping.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Mappings/LayoutMapping.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/LayoutMapping.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/LayoutMapping.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/LayoutMapping~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/LayoutMapping.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/LayoutMapping.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Mappings/StateMapping.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/StateMapping.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/StateMapping.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/StateMapping~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/StateMapping.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/StateMapping.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Mappings/StylingMapping.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/StylingMapping.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/StylingMapping.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/StylingMapping~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/StylingMapping.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/StylingMapping.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Models/CSSTypes.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/CSSTypes.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/CSSTypes.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/CSSTypes~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/CSSTypes.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/CSSTypes.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Models/ReactTypes.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ReactTypes.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ReactTypes.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ReactTypes~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ReactTypes.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ReactTypes.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Models/SwiftUITypes.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SwiftUITypes.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SwiftUITypes.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SwiftUITypes~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SwiftUITypes.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SwiftUITypes.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Parsing/BabelParserBundle.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/BabelParserBundle.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/BabelParserBundle.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/BabelParserBundle~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/BabelParserBundle.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/BabelParserBundle.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Parsing/CSSParser.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/CSSParser.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/CSSParser.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/CSSParser~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/CSSParser.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/CSSParser.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Parsing/FigmaFileParser.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/FigmaFileParser.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/FigmaFileParser.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/FigmaFileParser~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/FigmaFileParser.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/FigmaFileParser.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Parsing/ImageAssetImporter.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ImageAssetImporter.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ImageAssetImporter.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ImageAssetImporter~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ImageAssetImporter.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ImageAssetImporter.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Parsing/JavaScriptRuntime.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/JavaScriptRuntime.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/JavaScriptRuntime.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/JavaScriptRuntime~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/JavaScriptRuntime.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/JavaScriptRuntime.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Parsing/PostCSSParserBundle.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/PostCSSParserBundle.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/PostCSSParserBundle.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/PostCSSParserBundle~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/PostCSSParserBundle.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/PostCSSParserBundle.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Parsing/ProjectParser.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ProjectParser.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ProjectParser.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ProjectParser~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ProjectParser.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ProjectParser.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Parsing/ReactParser.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ReactParser.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ReactParser.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ReactParser~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ReactParser.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/ReactParser.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Parsing/SVGParser.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SVGParser.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SVGParser.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SVGParser~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SVGParser.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebook.build/SVGParser.dia"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/SwiftSyntaxMacrosGenericTestSupport.build/master.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/checkouts/swift-syntax/Sources/SwiftSyntaxMacrosGenericTestSupport/Assertions.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/SwiftSyntaxMacrosGenericTestSupport.build/Assertions.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/SwiftSyntaxMacrosGenericTestSupport.build/Assertions.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/SwiftSyntaxMacrosGenericTestSupport.build/Assertions~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/SwiftSyntaxMacrosGenericTestSupport.build/Assertions.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/SwiftSyntaxMacrosGenericTestSupport.build/Assertions.dia"
+  }
+}

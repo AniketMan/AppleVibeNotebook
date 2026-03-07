@@ -1,0 +1,33 @@
+{
+  "": {
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/master.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Tests/AppleVibeNotebookTests/CodeGeneratorTests.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/CodeGeneratorTests.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/CodeGeneratorTests.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/CodeGeneratorTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/CodeGeneratorTests.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/CodeGeneratorTests.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Tests/AppleVibeNotebookTests/FigmaParserTests.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/FigmaParserTests.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/FigmaParserTests.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/FigmaParserTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/FigmaParserTests.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/FigmaParserTests.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Tests/AppleVibeNotebookTests/MappingTests.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/MappingTests.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/MappingTests.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/MappingTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/MappingTests.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/MappingTests.dia"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Tests/AppleVibeNotebookTests/ParserTests.swift": {
+    "dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/ParserTests.d",
+    "object": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/ParserTests.swift.o",
+    "swiftmodule": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/ParserTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/ParserTests.swiftdeps",
+    "diagnostics": "/Users/aniketbhatt/Desktop/AppleVibeNotebook/.build/arm64-apple-macosx/debug/AppleVibeNotebookTests.build/ParserTests.dia"
+  }
+}
