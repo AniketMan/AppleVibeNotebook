@@ -62,14 +62,55 @@ CanvasCode will be delivered as a unified experience across three tiers of Apple
 -   **One-Click Xcode Project:** A button to generate and open a complete, buildable Xcode project from the current canvas design.
 -   **Remote Build & Preview:** The ability to trigger a build process on a remote machine (e.g., the user's primary development Mac) directly from the iPad or iPhone app.
 
-## 5. JARVIS Core Integration
+## 5. Component Hierarchy & Object Library
+
+The component system is the backbone of CanvasCode. It is designed to eliminate the repetitive, copy-paste-driven workflow that plagues tools like Figma, replacing it with a clean, hierarchical, and reusable architecture.
+
+### 5.1. Hierarchy
+
+| Level | Name | Description |
+| :--- | :--- | :--- |
+| **Component** | Base building block | A reusable UI element (e.g., "Button", "Card", "NavBar"). It has configurable properties exposed as sliders, color pickers, toggles, and other direct-manipulation controls. |
+| **Preset** | Saved configuration | A specific, saved set of property values for a Component. For example, a "Primary CTA" Preset of the Button Component with rounded corners, a blue gradient, and bold text. Presets are first-class citizens in the Object Library. |
+| **Composition** | Component of Components | A higher-order element assembled from other Components and Presets. A "Login Form" Composition might contain a Logo Component, two TextField Components, and a Button Preset. Each child retains its own configurability. |
+| **App** | Full project | A collection of Compositions arranged into screens and views with defined navigation flows between them. |
+
+### 5.2. Object Library
+
+A persistent, searchable panel (analogous to Procreate's brush library) where all of the user's Components, Presets, and Compositions are organized and accessible. Users drag items from the Object Library directly onto the canvas. There is no copy-pasting, no file hunting, and no recreating elements from scratch.
+
+### 5.3. Inheritance & Overrides
+
+If the user updates a base Component (e.g., changes the default font on the "Button" Component), every Preset and every Composition that uses it will inherit the change automatically. However, if a user has explicitly overridden a specific property on a particular instance (e.g., changed the font color on one specific Button Preset), that override will be preserved and will not be affected by upstream changes.
+
+### 5.4. Sliders for Everything
+
+Every configurable property on a Component will be exposed as a direct-manipulation control: sliders for numeric values (corner radius, padding, font size, opacity, animation duration), color pickers for colors, dropdowns for easing curves, toggles for boolean states. The user changes it visually; the code updates in real-time behind the scenes. The code view is always available but never required.
+
+### 5.5. Portable Component Export
+
+Any individual Component, Preset, or Composition can be exported independently, without exporting an entire App. This allows a user to design a single polished UI element with a custom animation and drop it directly into an existing Swift or React project. This is a core daily-use workflow.
+
+## 6. Live Simulation Environment
+
+The "Run" mode will present the designed UI as a fully interactive, high-fidelity simulation directly within CanvasCode. The available simulation targets depend on the platform:
+
+| Running On | Can Simulate |
+| :--- | :--- |
+| **Mac** | iPhone, iPad, Mac window, Hybrid App |
+| **iPad** | iPhone, iPad, Hybrid App |
+| **iPhone** | iPhone only |
+
+The simulation covers the full UI layer: tapping buttons, navigating between screens, triggering animations, and scrolling through content. It will not connect to live backend services or databases. It is for testing user flow and visual fidelity only. The Hybrid App simulation target will launch the native SwiftUI host running the React code inside a `WKWebView`, allowing end-to-end testing of the complete hybrid experience.
+
+## 7. JARVIS Core Integration
 
 CanvasCode will not be just a standalone app; its engine will be a fundamental, extensible component of the JARVIS system.
 
 -   **Programmatic UI Generation:** JARVIS will have an internal API to access the CanvasCode engine. This will allow JARVIS to dynamically generate user interfaces for its own modules, create new ad-hoc tools, or even modify its own settings UI.
 -   **Self-Modification:** This creates a powerful feedback loop where JARVIS can design, build, and deploy new versions of its own tools and interfaces in response to user needs or system changes.
 
-## 6. Architectural Clarifications
+## 8. Architectural Clarifications
 
 -   **Export Limitation:** The React export will be limited to the UI component structure and styling. It will **not** and **cannot** transpile the deep native Swift logic that powers the `FoundationModels` integration, Continuity features, or other system-level APIs. This distinction will be made clear to the user during the export process.
 -   **Repo Rename:** The GitHub repository `AniketMan/AppleVibeNotebook` should be renamed to `AniketMan/CanvasCode` to reflect the new project vision.
