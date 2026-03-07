@@ -125,7 +125,7 @@ CanvasCode will not be just a standalone app; its engine will be a fundamental, 
 ## 8. Architectural Clarifications
 
 -   **Export Limitation:** The React export will be limited to the UI component structure and styling. It will **not** and **cannot** transpile the deep native Swift logic that powers the `FoundationModels` integration, Continuity features, or other system-level APIs. This distinction will be made clear to the user during the export process.
--   **Repo Rename:** ~~The GitHub repository `AniketMan/AppleVibeNotebook` should be renamed to `AniketMan/CanvasCode`.~~ **DONE.** The repository is now `AniketMan/CanvasCode`.
+-   **Repo Name:** The repository remains `AniketMan/AppleVibeNotebook`. The internal project codename is **CanvasCode**.
 
 ## 9. Apple Human Interface Guidelines Compliance
 
