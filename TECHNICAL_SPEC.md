@@ -33,16 +33,23 @@ CanvasCode will be delivered as a unified experience across three tiers of Apple
 
 ### 4.1. Core Interaction Model
 
-> **CRITICAL CLARIFICATION:** CanvasCode is NOT a visual node-based editor or a drag-and-drop canvas tool like Figma. The primary interaction model is **text and voice**. The user describes what they want, and the AI writes the code. The app then shows a live preview of the result alongside the generated code.
+> **CRITICAL CLARIFICATION:** CanvasCode is NOT a visual node-based editor or a traditional drag-and-drop canvas tool like Figma. The primary creation model is **text and voice**. The user describes what they want, and the AI writes the code. The app then shows a live preview of the result.
 
-The interaction flow is as follows:
+The app has three distinct interface layers, each serving a specific purpose:
+
+| Layer | Purpose | Examples |
+| :--- | :--- | :--- |
+| **Text / Voice Input** | The primary way to create and iterate. The user describes what they want; the AI writes the code. | "Create a login screen", "Make the button bigger", "Add a fade-in animation" |
+| **Visual Tooling** | A rich set of visual controls for direct manipulation of properties and animation. This is NOT a freeform canvas editor. It is a structured panel-based interface with layers, sliders, color pickers, keyframe timelines, and animation curves. Users can drag elements to reposition them in the live preview. | Layers panel, property sliders (corner radius, opacity, padding), keyframe editor, easing curve picker, color pickers |
+| **Code View** | A side-by-side code panel showing the generated SwiftUI or React code. Users who know the code can quickly tweak values, change properties, or adjust layout directly. This is a convenience feature for fast iteration, not the primary interface. | Editing a padding value, changing a color hex code, adjusting a font size |
+
+The interaction flow is:
 
 1. The user describes a UI element or screen via **text input or voice**. This is the primary way to build.
 2. The AI (powered by Foundation Models) **writes the code** in the background (SwiftUI or React).
-3. The app displays a **live preview** of the generated UI alongside the **code view** in a side-by-side layout.
-4. The user can **read and modify the code directly** in the code view — changing values, tweaking properties, adjusting layout. This is important for quick iteration without having to re-describe everything.
-5. The user can also **drag elements around** in the live preview to reposition them, and those changes will be reflected in the code.
-6. For **deep editing, debugging, or advanced development**, the user must export to Xcode. CanvasCode is not a replacement for Xcode. It is a rapid prototyping and creation tool that feeds into Xcode when the project is ready for full development.
+3. The app displays a **live preview** of the generated UI. The user can use the **visual tooling** (layers, sliders, keyframes) to refine properties and animations.
+4. The **code view** is always accessible alongside the preview for users who want to read or quickly modify values directly.
+5. For **deep editing, debugging, complex logic, state management, networking, or advanced development**, the user must export to Xcode (for Swift) or their preferred React IDE. CanvasCode is not a replacement for a full IDE. It is a rapid creation and prototyping tool that feeds into Xcode or a React project when the work is ready for full development.
 
 ### 4.2. Export Formats
 
