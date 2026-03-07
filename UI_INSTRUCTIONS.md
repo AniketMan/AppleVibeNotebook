@@ -21,31 +21,53 @@ Liquid Glass combines the optical properties of glass with fluidity. It blurs co
 ### 2.2. Visual Hierarchy
 Liquid Glass is the topmost layer. Key navigation elements (Toolbar, Action Bar, Inspector) float in this layer. The content (the Canvas) lives beneath it. This separation is non-negotiable.
 
-## 3. Global Layout Architecture
+## 3. Homescreen & File Management
+
+Before entering the canvas, users manage their projects in the Homescreen. This interface is modeled after Linearity Curve's gallery and file management system, utilizing Liquid Glass elements over a subtle, blurred background.
+
+### 3.1. Homescreen Layout
+The Homescreen is divided into two primary areas: a collapsible Sidebar on the left and the main Gallery on the right.
+
+- **Sidebar (Left):** Contains navigation for Cloud Documents, Local Storage, Shared with Me, and Recently Deleted. It also includes links to Settings and Help. The sidebar uses a `.glassEffect()` background and can be collapsed to give the Gallery more breathing room.
+- **Gallery (Center/Right):** A grid view of all documents and folders. It displays thumbnails of projects ordered chronologically by default.
+- **Top Bar (Right):** Contains three primary action buttons:
+  1. **New Document (`plus` icon):** Opens the template chooser or starts a blank project.
+  2. **New Folder (`folder.badge.plus` icon):** Creates a new organizational folder.
+  3. **Select (`checkmark.circle` icon):** Enters multi-select mode for batch operations.
+
+### 3.2. File Organization & Interaction
+Project organization relies on direct manipulation and intuitive gestures rather than deep nested menus.
+
+- **Drag and Drop:** Users can drag one document onto another to automatically create a new folder containing both (similar to iOS Home Screen app grouping).
+- **Context Menus:** Long-pressing a document or folder reveals a Liquid Glass context menu with options to Rename, Duplicate, Move, Share, or Delete.
+- **Removing from Folders:** To remove a document from a folder, the user long-presses the document, uses another finger to tap the "Back" button, and drops the document in the parent directory.
+- **Cloud Status:** Each document thumbnail displays a subtle cloud icon indicator showing its sync status (synced, syncing, or offline available).
+
+## 4. Global Layout Architecture
 
 The application interface is divided into three primary zones, directly mirroring Linearity Curve's layout.
 
-### 3.1. The Toolbar (Left Edge)
+### 4.1. The Toolbar (Left Edge)
 A vertical strip anchored to the left edge of the screen. It houses the primary creation tools.
 
 - **Structure:** A vertical `VStack` wrapped in a `GlassEffectContainer`.
 - **Contents:** Selection Tool, Node Tool, Text Tool, Shape Tool, and the AI Companion summon button.
 - **Behavior:** It is persistent but floats above the canvas. On iPad, it sits near the left thumb. On Mac, it docks to the left edge of the window.
 
-### 3.2. The Action Bar (Top Center)
+### 4.2. The Action Bar (Top Center)
 A floating, customizable horizontal bar at the top center of the screen.
 
 - **Structure:** A horizontal `HStack` using `.glassEffect(in: .capsule)`.
 - **Contents:** Document Name, Undo/Redo, Zoom Percentage, Export Button, and Play Mode Toggle.
 - **Grouping:** Use `ToolbarSpacer` to separate logical groups of icons. Never use text labels in the Action Bar; rely exclusively on SF Symbols with proper accessibility labels.
 
-### 3.3. The Context-Aware Inspector (Right Edge)
+### 4.3. The Context-Aware Inspector (Right Edge)
 The Inspector is a dynamic, tabbed panel anchored to the right side of the screen. It is the control center for all properties and layers.
 
 - **Structure:** A floating panel with a `.glassEffect(in: .rect(cornerRadius: 16.0))` background. It contains three main tabs: Style, Layers, and Code.
 - **Behavior:** The Inspector can be hidden or shown by tapping its active tab. It must never require horizontal scrolling.
 
-#### 3.3.1. Style Tab
+#### 4.3.1. Style Tab
 The Style tab uses collapsible sections to declutter the workspace. It is strictly context-aware; it only shows controls relevant to the current selection.
 
 - **Location (Always visible at top):** X, Y, Width, Height, Rotation, and Flip buttons.
@@ -53,15 +75,15 @@ The Style tab uses collapsible sections to declutter the workspace. It is strict
 - **Effects (Collapsible):** The dedicated section for applying Liquid Glass to the user's design. Includes sliders for Frostness, Refraction, Depth, Dispersion, Light Angle, and Light Intensity.
 - **Fill / Stroke / Shadow:** Each is a collapsible section with a master toggle switch to enable/disable the property.
 
-#### 3.3.2. Layers Tab
+#### 4.3.2. Layers Tab
 A hierarchical list of all artboards, groups, and elements.
 - Supports drag-to-reorder and swipe-to-delete.
 - Empty artboards can be selected by clicking anywhere inside them. Populated artboards are selected by clicking their title label.
 
-#### 3.3.3. Code Tab
+#### 4.3.3. Code Tab
 Replaces the Library tab from Linearity. This displays the real-time SwiftUI or React code generated by the AI for the selected component.
 
-## 4. The Liquid Glass Companion (Voice UI)
+## 5. The Liquid Glass Companion (Voice UI)
 
 The AI Companion is not a standard button; it is a living entity rendered entirely using advanced Liquid Glass effects.
 
@@ -71,22 +93,22 @@ The AI Companion is not a standard button; it is a living entity rendered entire
 - **Processing State:** Exhibits an internal swirling animation, utilizing the `dispersion` property of the `Glass` material to split light into subtle color shifts.
 - **Positioning:** Free-floating and draggable by the user. It remembers its position.
 
-## 5. Interaction Patterns
+## 6. Interaction Patterns
 
-### 5.1. Popovers over Modals
+### 6.1. Popovers over Modals
 Following the Linearity and Essayist patterns, CanvasCode uses popovers for all secondary interactions (color pickers, font selection, citation styles). 
 
 - **Implementation:** Popovers must originate from the control that summoned them. They must use the `.glassEffect()` background and avoid obscuring the primary selection. Full-screen modals are strictly forbidden unless required for destructive actions.
 
-### 5.2. Direct Manipulation
+### 6.2. Direct Manipulation
 All properties in the Inspector must use direct manipulation controls.
 - Numeric values (padding, corner radius) must be adjustable via sliders or by dragging horizontally on the text field.
 - Controls must adopt the rounder forms dictated by the iOS 26 hardware curvature guidelines.
 
-### 5.3. Scroll Edge Effects
+### 6.3. Scroll Edge Effects
 If any custom scrolling list (like the Layers panel) passes beneath a fixed header within the Inspector, use the `safeAreaBar(edge:alignment:spacing:content:)` API to apply a scroll edge effect, obscuring the content beneath the header to maintain legibility.
 
-## 6. Implementation Directives
+## 7. Implementation Directives
 
 1. **Purge the Old UI:** The existing `WorkspaceView`, `ConvertToolView`, and `NotebookEditorView` files must be deleted. The split-view notebook paradigm is dead.
 2. **Shared Foundation:** The Toolbar, Action Bar, and Inspector must be built as shared SwiftUI views. The iPad is the reference implementation. The Mac version will inherit this layout, optionally utilizing the standard macOS Menu Bar for redundant Action Bar commands.
