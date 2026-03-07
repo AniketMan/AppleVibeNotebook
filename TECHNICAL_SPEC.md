@@ -31,22 +31,34 @@ CanvasCode will be delivered as a unified experience across three tiers of Apple
 
 ## 4. Key Features & Technical Implementation
 
-### 4.1. Core Functionality
+### 4.1. Core Interaction Model
 
--   **Visual Canvas:** A freeform, infinite canvas where users can draw, arrange, and style UI components. The UI will be intuitive and gesture-based, avoiding the rigidity of traditional design tools.
--   **Real-time Code Generation:** All visual manipulations on the canvas will be instantly translated into both SwiftUI and React code, visible in a side-by-side or tabbed view.
--   **Dual-Platform Export:** Users can export their project in three distinct formats:
-    -   **Pure Swift:** A clean, production-ready, and buildable Xcode project.
-    -   **Pure React:** A set of organized React components (`.tsx` files) for web projects.
-    -   **Hybrid Component:** A self-contained SwiftUI View that wraps a `WKWebView` pointing to the generated React code. This component can be dropped into any existing native iOS project, allowing the React portion to handle its own backend service connections independently.
--   **Live Simulation Environment:** A "Run" mode that presents the designed UI as a fully interactive, high-fidelity simulation. This allows for testing the user flow and visual fidelity of the front-end directly within the app. The simulation targets will be platform-specific and will include a new **Hybrid App** target. This will launch a simulation of the native SwiftUI host app running the React code inside a `WKWebView`, allowing for end-to-end testing of the complete hybrid experience.
+> **CRITICAL CLARIFICATION:** CanvasCode is NOT a visual node-based editor or a drag-and-drop canvas tool like Figma. The primary interaction model is **text and voice**. The user describes what they want, and the AI writes the code. The app then shows a live preview of the result alongside the generated code.
 
-### 4.2. AI-Powered Inputs & Generation
+The interaction flow is as follows:
 
--   **Voice-to-UI:** Leveraging the `FoundationModels` framework, users can describe UI layouts and components in natural language (e.g., "Create a login screen with a logo, two text fields, and a button").
+1. The user describes a UI element or screen via **text input or voice**. This is the primary way to build.
+2. The AI (powered by Foundation Models) **writes the code** in the background (SwiftUI or React).
+3. The app displays a **live preview** of the generated UI alongside the **code view** in a side-by-side layout.
+4. The user can **read and modify the code directly** in the code view — changing values, tweaking properties, adjusting layout. This is important for quick iteration without having to re-describe everything.
+5. The user can also **drag elements around** in the live preview to reposition them, and those changes will be reflected in the code.
+6. For **deep editing, debugging, or advanced development**, the user must export to Xcode. CanvasCode is not a replacement for Xcode. It is a rapid prototyping and creation tool that feeds into Xcode when the project is ready for full development.
+
+### 4.2. Export Formats
+
+Users can export their project in three distinct formats:
+
+-   **Pure Swift:** A clean, production-ready, and buildable Xcode project.
+-   **Pure React:** A set of organized React components (`.tsx` files) for web projects.
+-   **Hybrid Component:** A self-contained SwiftUI View that wraps a `WKWebView` pointing to the generated React code. This component can be dropped into any existing native iOS project, allowing the React portion to handle its own backend service connections independently..
+
+### 4.3. AI-Powered Inputs
+
+-   **Voice-to-UI:** Leveraging the `FoundationModels` framework, users can describe UI layouts and components in natural language (e.g., "Create a login screen with a logo, two text fields, and a button"). The AI writes the code; the user sees the result.
 -   **Image-to-UI:** Using `VisionKit` and the multimodal capabilities of the on-device model, users can take a picture of a hand-drawn sketch or a whiteboard wireframe, and the app will generate the corresponding UI code.
+-   **Iterative Refinement:** The user can continue talking to the AI to refine the output (e.g., "Make the button bigger", "Change the background to dark mode", "Add a shadow to the card"). Each instruction updates the code and the live preview in real-time.
 
-### 4.3. Deep Apple Ecosystem Integration
+### 4.4. Deep Apple Ecosystem Integration
 
 -   **Foundation Models Framework:** This is the heart of the app's intelligence. We will use `SystemLanguageModel` for all language tasks, `@Generable` for structured data output, and the `Tool` protocol to allow the model to interact with app features.
 -   **Visual Intelligence:** With user permission, the app will leverage the system's ability to understand on-screen content, allowing users to reference elements from other apps in their designs.
@@ -57,7 +69,7 @@ CanvasCode will be delivered as a unified experience across three tiers of Apple
     -   **Continuity Camera:** Instantly pull photos of sketches from an iPhone into a project on a Mac or iPad.
 -   **iCloud Sync:** All projects, components, and assets will be stored in iCloud Drive, ensuring they are always available and up-to-date across all of the user's devices.
 
-### 4.4. Developer-Focused Features (Mac App)
+### 4.5. Developer-Focused Features (Mac App)
 
 -   **One-Click Xcode Project:** A button to generate and open a complete, buildable Xcode project from the current canvas design.
 -   **Remote Build & Preview:** The ability to trigger a build process on a remote machine (e.g., the user's primary development Mac) directly from the iPad or iPhone app.
