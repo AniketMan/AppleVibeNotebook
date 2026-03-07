@@ -51,13 +51,25 @@ The interaction flow is:
 4. The **code view** is always accessible alongside the preview for users who want to read or quickly modify values directly.
 5. For **deep editing, debugging, complex logic, state management, networking, or advanced development**, the user must export to Xcode (for Swift) or their preferred React IDE. CanvasCode is not a replacement for a full IDE. It is a rapid creation and prototyping tool that feeds into Xcode or a React project when the work is ready for full development.
 
-### 4.2. Export Formats
+### 4.2. Three Project Types
+
+Every project in CanvasCode is one of three types. The type determines what the user can build, how it runs, and where it can go.
+
+| Project Type | What It Produces | Can Run as Local Web App on Device? | Can Deploy to Web? | Can Become Native App? |
+| :--- | :--- | :--- | :--- | :--- |
+| **SwiftUI Only** | Native SwiftUI code | No (SwiftUI cannot run in a browser) | No | Yes — export to Xcode |
+| **React Only** | React components (.tsx) | **Yes** — runs in WKWebView, lives in local storage + iCloud | **Yes** — push to a web host | Requires wrapping in a native shell via Xcode |
+| **Hybrid** | SwiftUI host + React in WKWebView | **Partially** — the React portion can run as a local web app; the SwiftUI portion requires Xcode | The React portion can be deployed to web independently | Yes — export to Xcode for the full hybrid |
+
+> **RESEARCH FLAG FOR DEVELOPING AGENT:** Investigate whether there is any viable path to running a SwiftUI-only project as a local web app on device (e.g., transpilation, WebAssembly, or any other method). If no viable path exists, the user must be clearly informed that SwiftUI projects require Xcode to run as real apps. If a partial path exists (e.g., a static preview but not interactive), document it and present the option.
+
+### 4.2.1. Export Formats
 
 Users can export their project in three distinct formats:
 
 -   **Pure Swift:** A clean, production-ready, and buildable Xcode project.
 -   **Pure React:** A set of organized React components (`.tsx` files) for web projects.
--   **Hybrid Component:** A self-contained SwiftUI View that wraps a `WKWebView` pointing to the generated React code. This component can be dropped into any existing native iOS project, allowing the React portion to handle its own backend service connections independently..
+-   **Hybrid Component:** A self-contained SwiftUI View that wraps a `WKWebView` pointing to the generated React code. This component can be dropped into any existing native iOS project, allowing the React portion to handle its own backend service connections independently.
 
 ### 4.3. AI-Powered Inputs
 
@@ -143,6 +155,25 @@ CanvasCode supports a complete lifecycle for React-based web applications, from 
 | **Convert to Native** | If the user wants to turn it into a real native iOS/macOS app, they must open the project on a Mac, export it to Xcode, and build it through the standard native pipeline. This step cannot be done on iPhone or iPad. | Xcode on Mac. |
 
 This pipeline means a user can go from idea to functional app-on-their-phone in a single sitting, without ever touching a terminal, a server, or Xcode. The native conversion path exists for when they want to take it further.
+
+### 6.2. Play Mode (Full-Screen Simulation)
+
+In addition to the standard simulation view, CanvasCode will offer a **"Play" mode** that launches the app in a full-screen, immersive simulation. This removes all CanvasCode UI (panels, code view, tooling) and presents the designed app as if it were actually installed on the device. The user can interact with it naturally — tapping, scrolling, navigating between screens — as if it were a real, shipped application. This is the equivalent of hitting "Play" on a game engine. It is the fastest way to experience what the final product will feel like.
+
+### 6.3. Sharing via iCloud Link
+
+> **RESEARCH FLAG FOR DEVELOPING AGENT:** Investigate whether iCloud supports generating a shareable public link to a bundled React web app stored in iCloud Drive, such that another person could open the link in a browser and interact with the app. If iCloud does not support this natively, investigate alternatives:
+> - A temporary local server on the device that serves the web app, with a shareable link (similar to `ngrok` or Tailscale Funnel).
+> - A notification-based model: when someone tries to access the link, the owner's device receives a notification asking them to "turn on" sharing, which spins up a temporary local server.
+> - An App Clip or Shortcut that launches the web app in a WKWebView on the recipient's device.
+>
+> The goal is: a user should be able to share their creation with someone else without deploying to a public web host. If this is not feasible, document why and present the closest alternative.
+
+### 6.4. The Manus Analogy
+
+The best way to understand CanvasCode's relationship to the user is to think of it like the Manus AI assistant. In Manus, the user describes what they want in natural language, and the AI builds it — writing code, generating previews, iterating on feedback. The user can see the code, modify it, and interact with a live preview. But the output lives in a sandbox; it does not automatically become a public website or a deployed application unless the user explicitly chooses to host it.
+
+CanvasCode follows the same model. The user describes, the AI builds, and the result lives locally on the device and in iCloud. It never leaves the user's ecosystem unless they choose to export to Xcode, deploy to a web host, or share via an iCloud link. The key difference from Manus is that CanvasCode is native, on-device, private, and powered by Apple's Foundation Models — not a cloud service. The user's data and creations stay on their hardware at all times.
 
 ## 7. JARVIS Core Integration
 
