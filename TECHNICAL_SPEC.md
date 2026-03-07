@@ -45,7 +45,32 @@ CanvasCode will be delivered as a unified experience across three tiers of Apple
 
 ## 4. Key Features & Technical Implementation
 
-### 4.1. Core Interaction Model
+### 4.1. The Liquid Glass Companion (Voice Input UI)
+
+> **THIS IS THE MOST IMPORTANT UI ELEMENT IN THE ENTIRE APPLICATION. IT IS THE FACE OF CANVASCODE. IT MUST BE BEAUTIFUL, ALIVE, AND DELIGHTFUL.**
+
+The primary way users interact with CanvasCode is through voice. The voice interface is embodied as a **Liquid Glass orb** — a living, breathing, translucent blob that floats on the screen. It is not a static microphone button. It has personality. It has a life of its own.
+
+**Behavior:**
+-   When idle, the orb gently breathes and drifts with subtle, organic motion. It feels alive, like it's waiting and ready.
+-   When the user speaks, it morphs, stretches, and reacts to the audio input in real-time. Louder speech creates bigger deformations. Whispers create delicate ripples.
+-   When the AI is thinking/processing, the orb shifts into a contemplative animation — a slow, internal glow or swirl.
+-   When the AI responds (via text or speech), the orb pulses gently in sync with the output.
+-   It can be dragged anywhere on the screen. It remembers its position.
+-   It takes full advantage of Apple's Liquid Glass design language from iOS 26 / macOS 26. Translucency, refraction, depth, blur — all of it.
+
+**Platform-Specific Implementation:**
+
+**iPad (Primary):**
+The orb floats in a corner of the screen (user-repositionable). It is always accessible without taking over the screen. When the AI responds, it can either speak back (audio output) or display a clean, elegant text blurb near the orb. If the AI needs confirmation or presents a yes/no decision, it surfaces a minimal approval UI near the orb — not a full-screen modal. The orb is the user's always-present creative partner, not a disruptive overlay.
+
+**iPhone:**
+The iPhone's smaller screen cannot accommodate a persistent floating orb alongside the content. Instead, the voice input is a dedicated screen/mode. The user taps the voice button (or activates via a gesture) and enters a **voice-first screen** where they simply talk. The screen shows the Liquid Glass animation reacting to their voice, larger and more expressive than the iPad version. The AI's responses appear as text on this screen. When the user is done talking, they swipe or tap to return to the main view, where the AI's work is already reflected. This is designed for the "pacing and talking" workflow — the user is walking around, describing ideas, and the app is building in the background. They check the results when they're ready.
+
+**Mac:**
+Same as iPad. The Liquid Glass orb sits in a corner of the window. The Mac version may also support a keyboard shortcut to activate voice input without clicking.
+
+### 4.2. Core Interaction Model
 
 > **CRITICAL CLARIFICATION:** CanvasCode is NOT a visual node-based editor or a traditional drag-and-drop canvas tool like Figma. The primary creation model is **text and voice**. The user describes what they want, and the AI writes the code. The app then shows a live preview of the result.
 
@@ -65,7 +90,7 @@ The interaction flow is:
 4. The **code view** is always accessible alongside the preview for users who want to read or quickly modify values directly.
 5. For **deep editing, debugging, complex logic, state management, networking, or advanced development**, the user must export to Xcode (for Swift) or their preferred React IDE. CanvasCode is not a replacement for a full IDE. It is a rapid creation and prototyping tool that feeds into Xcode or a React project when the work is ready for full development.
 
-### 4.2. Three Project Types
+### 4.3. Three Project Types
 
 Every project in CanvasCode is one of three types. The type determines what the user can build, how it runs, and where it can go.
 
@@ -77,7 +102,7 @@ Every project in CanvasCode is one of three types. The type determines what the 
 
 > **RESEARCH FLAG FOR DEVELOPING AGENT:** Investigate whether there is any viable path to running a SwiftUI-only project as a local web app on device (e.g., transpilation, WebAssembly, or any other method). If no viable path exists, the user must be clearly informed that SwiftUI projects require Xcode to run as real apps. If a partial path exists (e.g., a static preview but not interactive), document it and present the option.
 
-### 4.2.1. Export Formats
+### 4.3.1. Export Formats
 
 Users can export their project in three distinct formats:
 
@@ -85,26 +110,13 @@ Users can export their project in three distinct formats:
 -   **Pure React:** A set of organized React components (`.tsx` files) for web projects.
 -   **Hybrid Component:** A self-contained SwiftUI View that wraps a `WKWebView` pointing to the generated React code. This component can be dropped into any existing native iOS project, allowing the React portion to handle its own backend service connections independently.
 
-### 4.3. Voice Input UI Design
-
-The voice input interface is a critical part of the experience and must feel natural, elegant, and non-intrusive. The design is platform-specific:
-
-**iPad:**
-The voice input is represented as a small, floating **Liquid Glass orb** — a soft, translucent blob that sits in a corner of the screen (user-repositionable). It is always accessible without taking over the screen. When the user speaks, the orb morphs and reacts to the audio input with subtle, organic animations. When the AI responds, it can either speak back (audio output) or display a clean, elegant text blurb near the orb. If the AI needs confirmation or presents a yes/no decision, it surfaces a minimal approval UI near the orb — not a full-screen modal. The orb is the user's always-present creative partner, not a disruptive overlay.
-
-**iPhone:**
-The iPhone's smaller screen cannot accommodate a persistent floating orb alongside the content. Instead, the voice input is a dedicated screen/mode. The user taps the voice button (or activates via a gesture) and enters a **voice-first screen** where they simply talk. The screen shows a minimal waveform or Liquid Glass animation reacting to their voice. The AI's responses appear as text on this screen. When the user is done talking, they swipe or tap to return to the main view, where the AI's work is already reflected. This is designed for the "pacing and talking" workflow — the user is walking around, describing ideas, and the app is building in the background. They check the results when they're ready.
-
-**Mac:**
-Similar to iPad. The Liquid Glass orb sits in a corner of the window. The Mac version may also support a keyboard shortcut to activate voice input without clicking.
-
 ### 4.4. AI-Powered Inputs
 
 -   **Voice-to-UI:** Leveraging the `FoundationModels` framework, users can describe UI layouts and components in natural language (e.g., "Create a login screen with a logo, two text fields, and a button"). The AI writes the code; the user sees the result.
 -   **Image-to-UI:** Using `VisionKit` and the multimodal capabilities of the on-device model, users can take a picture of a hand-drawn sketch or a whiteboard wireframe, and the app will generate the corresponding UI code.
 -   **Iterative Refinement:** The user can continue talking to the AI to refine the output (e.g., "Make the button bigger", "Change the background to dark mode", "Add a shadow to the card"). Each instruction updates the code and the live preview in real-time.
 
-### 4.4. Deep Apple Ecosystem Integration
+### 4.5. Deep Apple Ecosystem Integration
 
 -   **Foundation Models Framework:** This is the heart of the app's intelligence. We will use `SystemLanguageModel` for all language tasks, `@Generable` for structured data output, and the `Tool` protocol to allow the model to interact with app features.
 -   **Visual Intelligence:** With user permission, the app will leverage the system's ability to understand on-screen content, allowing users to reference elements from other apps in their designs.
@@ -115,7 +127,7 @@ Similar to iPad. The Liquid Glass orb sits in a corner of the window. The Mac ve
     -   **Continuity Camera:** Instantly pull photos of sketches from an iPhone into a project on a Mac or iPad.
 -   **iCloud Sync:** All projects, components, and assets will be stored in iCloud Drive, ensuring they are always available and up-to-date across all of the user's devices.
 
-### 4.5. Developer-Focused Features (Mac App)
+### 4.6. Developer-Focused Features (Mac App)
 
 -   **One-Click Xcode Project:** A button to generate and open a complete, buildable Xcode project from the current canvas design.
 -   **Remote Build & Preview:** The ability to trigger a build process on a remote machine (e.g., the user's primary development Mac) directly from the iPad or iPhone app.
@@ -309,3 +321,9 @@ The file shall be named `TECHNICAL_KNOWLEDGE_BASE.md` and shall live in the root
 -   **Errors & Solutions:** Every significant error encountered and how it was resolved. This is a debugging reference.
 
 This document is a **living knowledge base**. It is not a changelog. It is not release notes. It is a comprehensive, searchable, structured reference of everything the developing agent has learned about building this application. It must be treated with the same importance as the codebase itself. If a piece of knowledge is not in this document, it may as well not exist.
+
+## 14. Low-Priority: Figma File Import (Post-iPad Launch)
+
+> **LOWEST PRIORITY. Do not begin this until the iPad app is complete and functional.**
+
+> **RESEARCH FLAG FOR DEVELOPING AGENT:** After the iPad app has shipped, investigate whether the Figma file reader / Figma API has received updates that allow better reading and parsing of `.fig` files or Figma project data. Evaluate whether CanvasCode could import Figma designs and convert them into CanvasCode components (SwiftUI or React). Assess the current state of Figma's REST API, any open-source Figma file parsers, and whether the fidelity of import would be sufficient to be useful. Document findings in the `TECHNICAL_KNOWLEDGE_BASE.md`. Do not implement anything without explicit approval.
