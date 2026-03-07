@@ -91,17 +91,29 @@ Every configurable property on a Component will be exposed as a direct-manipulat
 
 Any individual Component, Preset, or Composition can be exported independently, without exporting an entire App. This allows a user to design a single polished UI element with a custom animation and drop it directly into an existing Swift or React project. This is a core daily-use workflow.
 
+### 5.6. "Save as Component" from Any Project
+
+While working inside an App project, a user can long-press (or right-click on Mac) any element or group of elements on the canvas and select "Save as Component" from the context menu. This promotes the selection to the user's global Component Library, extracting it from the project it was created in. From that point forward, the Component is available in the Object Library for use in any other project. The user can then create Presets of it, nest it inside Compositions, or export it independently. The workflow is: build it once, save it, reuse it forever. No element should ever be "trapped" inside a single project.
+
+### 5.7. Platform Starter Templates
+
+When creating a new Component, the user can start from a blank canvas or from a platform-specific starter template. Templates will be provided for common UIKit elements (Button, TableViewCell, NavigationBar), SwiftUI views (NavigationStack, List, TabView), and React components (Card, Modal, Form). The template provides the base structure and standard properties; the user customizes from there using the visual controls.
+
 ## 6. Live Simulation Environment
 
 The "Run" mode will present the designed UI as a fully interactive, high-fidelity simulation directly within CanvasCode. The available simulation targets depend on the platform:
 
 | Running On | Can Simulate |
 | :--- | :--- |
-| **Mac** | iPhone, iPad, Mac window, Hybrid App |
-| **iPad** | iPhone, iPad, Hybrid App |
-| **iPhone** | iPhone only |
+| **Mac** | iPhone, iPad, Mac window, Hybrid App, Web App |
+| **iPad** | iPhone, iPad, Hybrid App, Web App |
+| **iPhone** | iPhone, Web App |
 
 The simulation covers the full UI layer: tapping buttons, navigating between screens, triggering animations, and scrolling through content. It will not connect to live backend services or databases. It is for testing user flow and visual fidelity only. The Hybrid App simulation target will launch the native SwiftUI host running the React code inside a `WKWebView`, allowing end-to-end testing of the complete hybrid experience.
+
+### 6.1. React-as-Web-App on Device
+
+If a user builds a React project in CanvasCode, they can run it as a local web application directly on their device via a `WKWebView`. No external server is required. The generated React code is bundled and rendered locally, providing an instant, self-contained preview of the web application. This is available on all platforms (iPhone, iPad, Mac).
 
 ## 7. JARVIS Core Integration
 
@@ -113,4 +125,18 @@ CanvasCode will not be just a standalone app; its engine will be a fundamental, 
 ## 8. Architectural Clarifications
 
 -   **Export Limitation:** The React export will be limited to the UI component structure and styling. It will **not** and **cannot** transpile the deep native Swift logic that powers the `FoundationModels` integration, Continuity features, or other system-level APIs. This distinction will be made clear to the user during the export process.
--   **Repo Rename:** The GitHub repository `AniketMan/AppleVibeNotebook` should be renamed to `AniketMan/CanvasCode` to reflect the new project vision.
+-   **Repo Rename:** ~~The GitHub repository `AniketMan/AppleVibeNotebook` should be renamed to `AniketMan/CanvasCode`.~~ **DONE.** The repository is now `AniketMan/CanvasCode`.
+
+## 9. Apple Human Interface Guidelines Compliance
+
+The entire application will be built in strict adherence to Apple's Human Interface Guidelines (HIG). This is a non-negotiable requirement. All navigation patterns, touch targets, typography scales, spacing, safe area insets, Dynamic Type support, and accessibility features will conform to Apple's published specifications. No custom navigation hacks, no non-standard gestures, no deviations. If Apple's guidelines specify a behavior, CanvasCode will implement it exactly.
+
+## 10. Performance Requirements
+
+Performance is a first-class requirement, not an afterthought. The application will be optimized specifically for Apple Silicon hardware.
+
+-   **Canvas Rendering:** The infinite canvas must maintain 60fps (120fps on ProMotion displays) during pan, zoom, and component manipulation, regardless of project complexity.
+-   **Code Generation:** Real-time code generation must not introduce perceptible latency. Visual changes on the canvas must be reflected in the code view within one frame.
+-   **AI Inference:** On-device Foundation Model inference must not block the main thread. All AI operations will run asynchronously with clear progress indication.
+-   **Simulation:** The Live Simulation Environment must run at native frame rates with no dropped frames during animation previews.
+-   **Memory:** The app must be aggressive about memory management, especially on iPhone and iPad where resources are more constrained. Large projects must use lazy loading and virtualization for off-screen components.
