@@ -260,7 +260,7 @@ public final class ImageAssetImporter {
             }
           ],
           "info" : {
-            "author" : "React2SwiftUI",
+            "author" : "AppleVibeNotebook",
             "version" : 1
           },
           "properties" : {
@@ -337,7 +337,7 @@ public final class ImageAssetImporter {
             }
           ],
           "info" : {
-            "author" : "React2SwiftUI",
+            "author" : "AppleVibeNotebook",
             "version" : 1
           },
           "properties" : {
@@ -413,7 +413,7 @@ public final class ImageAssetImporter {
             }
           ],
           "info" : {
-            "author" : "React2SwiftUI",
+            "author" : "AppleVibeNotebook",
             "version" : 1
           },
           "properties" : {

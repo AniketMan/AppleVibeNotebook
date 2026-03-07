@@ -1,5 +1,5 @@
 // Generated SwiftUI Code from AppleDesignKit.jsx
-// React2SwiftUI Canvas - Figma Fast Path (1:1 Apple Design Resources Mapping)
+// AppleVibeNotebook - Figma Fast Path (1:1 Apple Design Resources Mapping)
 // This demonstrates direct conversion from React Apple-style components to native SwiftUI
 
 import SwiftUI

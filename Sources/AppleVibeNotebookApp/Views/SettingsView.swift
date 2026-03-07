@@ -95,7 +95,7 @@ struct AboutSettingsView: View {
                 .font(.system(size: 60))
                 .foregroundStyle(.tint)
 
-            Text("React2SwiftUI Canvas")
+            Text("AppleVibeNotebook")
                 .font(.title)
                 .fontWeight(.bold)
 

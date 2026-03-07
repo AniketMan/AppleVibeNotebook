@@ -1,6 +1,6 @@
 import SwiftUI
 import UniformTypeIdentifiers
-import React2SwiftUI
+import AppleVibeNotebook
 
 // MARK: - Figma Asset Browser View
 

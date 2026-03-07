@@ -35,7 +35,7 @@ public struct ConversionReport: Codable, Sendable {
     /// Exports the report as Markdown.
     public func toMarkdown() -> String {
         var md = """
-        # React2SwiftUI Conversion Report
+        # AppleVibeNotebook Conversion Report
 
         **Source Project:** \(sourceProject)
         **Generated:** \(ISO8601DateFormatter().string(from: generatedAt))

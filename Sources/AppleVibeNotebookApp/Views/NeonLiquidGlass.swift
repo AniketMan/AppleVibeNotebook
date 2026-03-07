@@ -280,7 +280,7 @@ extension View {
                     Image(systemName: "waveform.circle.fill")
                         .font(.system(size: 48))
                         .foregroundStyle(.cyan)
-                    Text("React2SwiftUI")
+                    Text("AppleVibeNotebook")
                         .font(.system(size: 24, weight: .bold))
                         .foregroundStyle(.white)
                     Text("Canvas")
