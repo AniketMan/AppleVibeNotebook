@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fig Viewer</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Upload Screen -->
+    <div id="upload-screen" class="screen active">
+      <div class="upload-container">
+        <div class="logo">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect width="48" height="48" rx="12" fill="#2d1b69"/>
+            <path d="M14 34V14h8a6 6 0 0 1 0 12h-8m8-12h8a6 6 0 0 1 0 12h-8" stroke="#a855f7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h1>Fig Viewer</h1>
+        <p class="subtitle">Upload a .fig file to extract and browse all assets with their real Figma layer names.</p>
+        <div id="dropzone" class="dropzone" tabindex="0">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+          </svg>
+          <span class="drop-text">Drop your .fig file here</span>
+          <span class="drop-hint">or click to browse</span>
+          <input type="file" id="file-input" accept=".fig" hidden />
+        </div>
+        <div id="upload-progress" class="progress-container hidden">
+          <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+          <p class="progress-text" id="progress-text">Uploading...</p>
+        </div>
+        <div id="upload-error" class="error hidden"></div>
+      </div>
+    </div>
+
+    <!-- Gallery Screen -->
+    <div id="gallery-screen" class="screen">
+      <header class="toolbar">
+        <div class="toolbar-left">
+          <div class="file-info">
+            <svg width="20" height="20" viewBox="0 0 48 48" fill="none">
+              <rect width="48" height="48" rx="12" fill="#2d1b69"/>
+              <path d="M14 34V14h8a6 6 0 0 1 0 12h-8m8-12h8a6 6 0 0 1 0 12h-8" stroke="#a855f7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div>
+              <span class="file-name" id="file-name">Untitled.fig</span>
+              <span class="file-count" id="file-count">0 assets</span>
+            </div>
+          </div>
+        </div>
+        <div class="toolbar-right">
+          <button class="btn btn-icon" id="btn-grid" title="Grid view">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </button>
+          <button class="btn btn-icon" id="btn-list" title="List view">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="4" width="18" height="3" rx="1"/><rect x="3" y="10.5" width="18" height="3" rx="1"/><rect x="3" y="17" width="18" height="3" rx="1"/></svg>
+          </button>
+          <button class="btn btn-primary" id="btn-download-zip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Download ZIP
+          </button>
+          <button class="btn btn-ghost" id="btn-new-file">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+            New File
+          </button>
+        </div>
+      </header>
+
+      <div class="filters">
+        <div class="search-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="search-input" placeholder="Search assets..." />
+        </div>
+        <select id="filter-category"><option value="all">All Categories</option></select>
+        <select id="filter-type"><option value="all">All Types</option></select>
+        <select id="sort-by">
+          <option value="name">Sort: Name</option>
+          <option value="size">Sort: Size</option>
+          <option value="category">Sort: Category</option>
+        </select>
+        <span class="asset-count" id="asset-count">0 assets</span>
+      </div>
+
+      <div id="gallery" class="gallery grid-view"></div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox hidden">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev">&lsaquo;</button>
+      <button class="lightbox-nav lightbox-next" id="lightbox-next">&rsaquo;</button>
+      <div class="lightbox-content">
+        <img id="lightbox-img" src="" alt="" />
+        <div class="lightbox-info">
+          <h3 id="lightbox-name"></h3>
+          <p id="lightbox-path" class="lightbox-path"></p>
+          <p id="lightbox-meta" class="lightbox-meta"></p>
+          <button class="btn btn-primary" id="lightbox-download">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Download
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/js/app.js"></script>
+</body>
+</html>
