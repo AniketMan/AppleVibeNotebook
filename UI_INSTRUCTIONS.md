@@ -1,89 +1,93 @@
-# CanvasCode UI Instructions & Architecture Guide
+# CanvasCode UI Architecture & Implementation Guide
 
-## 1. Interface Philosophy
+## 1. Core Interface Philosophy
 
-The CanvasCode user interface is built on the core principle that the document (the canvas) is the center of the experience. The chrome must be minimal, floating, and contextual, deferring maximum screen real estate to the user's design. This philosophy draws heavily from the design patterns of Linearity Curve, Linearity Move, and Essayist, adapted for a voice-first AI design tool.
+The CanvasCode interface is modeled directly after **Linearity Curve**, adapted for a voice-first AI design workflow. It is built entirely on Apple's **Liquid Glass** design language (introduced in iOS/macOS 26). 
 
-The application abandons traditional heavy sidebars and fixed toolbars in favor of a fluid, adaptive interface that feels native to both iPadOS and macOS. Every control should be exactly where it is needed, when it is needed, and invisible otherwise.
+The guiding principle is full immersion: the user's canvas is the only opaque element on screen. All chrome, tools, and panels float above the canvas in the Liquid Glass layer, allowing the underlying design to refract and blur through the interface. There are no solid backgrounds for navigation elements.
 
-## 2. Global Layout Architecture
+## 2. Liquid Glass Implementation Rules
 
-The application interface is divided into four primary zones. These zones remain conceptually consistent across iPad and Mac, though their specific implementations adapt to the platform's input methods.
+Every UI component in CanvasCode must utilize the Liquid Glass APIs provided by SwiftUI. Custom backgrounds are strictly prohibited for navigation and tool elements.
 
-### 2.1. The Canvas (Center)
-The canvas is an infinite, scrollable, zoomable workspace. It is the primary view of the application. All UI designs are represented as artboards on this canvas. The canvas background should support both light and dark modes, with a preference for a deep, neutral dark gray in dark mode to allow the designed UI elements to stand out. 
+### 2.1. Material Properties
+Liquid Glass combines the optical properties of glass with fluidity. It blurs content behind it, reflects color and light, and reacts to touch and pointer interactions in real time.
 
-### 2.2. The Floating Toolbar (Left Edge)
-Instead of a fixed sidebar, the primary tools are housed in a floating, pill-shaped toolbar anchored to the middle-left edge of the screen. This pattern, inspired by Essayist, ensures tools are always accessible without permanently consuming horizontal space.
+- **Standard Application:** Use the `.glassEffect()` modifier on all floating panels, toolbars, and buttons. By default, this applies the `regular` variant of `Glass` within a `Capsule` shape.
+- **Custom Shapes:** For larger panels (like the Inspector), use `.glassEffect(in: .rect(cornerRadius: 16.0))` to maintain consistent hardware-concentric curvature.
+- **Interactivity:** All buttons must use `.glassEffect(.regular.interactive())` to ensure they fluidly morph and react to touch/pointer input.
+- **Containers:** When grouping multiple tools (e.g., in the Toolbar), wrap them in a `GlassEffectContainer(spacing: 8.0)` to allow the shapes to blend and morph together seamlessly.
 
-**Contents:**
-- Selection Tool
-- Text Tool
-- Component Library (Opens Object Library popover)
-- Export Menu
+### 2.2. Visual Hierarchy
+Liquid Glass is the topmost layer. Key navigation elements (Toolbar, Action Bar, Inspector) float in this layer. The content (the Canvas) lives beneath it. This separation is non-negotiable.
 
-### 2.3. The Contextual Inspector (Right Edge)
-When an element or artboard is selected, a contextual Inspector panel appears on the right edge. If nothing is selected, this panel should collapse or hide completely to maximize canvas space.
+## 3. Global Layout Architecture
 
-**Structure:**
-- **Style Tab:** Controls for Position (X, Y), Dimensions (W, H), Opacity, Fill, Stroke, Effects (including the Liquid Glass effect controls: Frostness, Refraction, Depth, Dispersion).
-- **Layout Tab:** Z-index ordering (Bring Forward, Send Backward), Grouping, Masking, and Alignment controls.
-- **Code View Tab:** A split-view or toggleable panel that reveals the generated SwiftUI or React code for the selected component.
+The application interface is divided into three primary zones, directly mirroring Linearity Curve's layout.
 
-### 2.4. The Action Bar (Top Center)
-A minimal, floating pill at the top center of the screen handles document-level actions.
+### 3.1. The Toolbar (Left Edge)
+A vertical strip anchored to the left edge of the screen. It houses the primary creation tools.
 
-**Contents:**
-- Undo / Redo
-- Zoom Percentage Dropdown
-- Document Name
-- Play Mode Toggle (Full-screen simulation)
+- **Structure:** A vertical `VStack` wrapped in a `GlassEffectContainer`.
+- **Contents:** Selection Tool, Node Tool, Text Tool, Shape Tool, and the AI Companion summon button.
+- **Behavior:** It is persistent but floats above the canvas. On iPad, it sits near the left thumb. On Mac, it docks to the left edge of the window.
 
-## 3. The Liquid Glass Companion (Voice UI)
+### 3.2. The Action Bar (Top Center)
+A floating, customizable horizontal bar at the top center of the screen.
 
-As defined in the technical specification, the Liquid Glass Companion is the most critical UI element in CanvasCode. It serves as the primary voice interaction surface and the embodiment of the AI.
+- **Structure:** A horizontal `HStack` using `.glassEffect(in: .capsule)`.
+- **Contents:** Document Name, Undo/Redo, Zoom Percentage, Export Button, and Play Mode Toggle.
+- **Grouping:** Use `ToolbarSpacer` to separate logical groups of icons. Never use text labels in the Action Bar; rely exclusively on SF Symbols with proper accessibility labels.
 
-### 3.1. Visual Design
-The Companion is a translucent, floating orb that utilizes the Liquid Glass design language. It must feature real-time refraction, depth, and dispersion effects, reacting dynamically to the content beneath it on the canvas.
+### 3.3. The Context-Aware Inspector (Right Edge)
+The Inspector is a dynamic, tabbed panel anchored to the right side of the screen. It is the control center for all properties and layers.
 
-### 3.2. Interaction States
-- **Idle:** The orb exhibits a slow, organic "breathing" animation, drifting slightly to feel alive.
-- **Listening:** When the user speaks, the orb deforms and stretches in real-time, syncing with the audio waveform's amplitude and frequency.
-- **Processing:** The orb transitions to a smooth, internal swirling animation, indicating the AI is generating code or analyzing the request.
-- **Responding:** The orb pulses gently in sync with the AI's audio or text output.
+- **Structure:** A floating panel with a `.glassEffect(in: .rect(cornerRadius: 16.0))` background. It contains three main tabs: Style, Layers, and Code.
+- **Behavior:** The Inspector can be hidden or shown by tapping its active tab. It must never require horizontal scrolling.
 
-### 3.3. Positioning
-The Companion is a floating element that the user can drag and place anywhere on the screen. Its position must be persisted across sessions. It must never be obscured by other UI panels.
+#### 3.3.1. Style Tab
+The Style tab uses collapsible sections to declutter the workspace. It is strictly context-aware; it only shows controls relevant to the current selection.
 
-## 4. Interaction Patterns
+- **Location (Always visible at top):** X, Y, Width, Height, Rotation, and Flip buttons.
+- **Appearance (Collapsible):** Blend Mode, Opacity, Blur.
+- **Effects (Collapsible):** The dedicated section for applying Liquid Glass to the user's design. Includes sliders for Frostness, Refraction, Depth, Dispersion, Light Angle, and Light Intensity.
+- **Fill / Stroke / Shadow:** Each is a collapsible section with a master toggle switch to enable/disable the property.
 
-### 4.1. Popovers Over Modals
-CanvasCode strictly favors contextual popovers over full-screen modals. When a user needs to select a font, pick a color, or adjust citation styles (as seen in Essayist), the UI should present a clean, card-based popover attached to the relevant control. Modals should be reserved exclusively for destructive actions or critical document-level settings.
+#### 3.3.2. Layers Tab
+A hierarchical list of all artboards, groups, and elements.
+- Supports drag-to-reorder and swipe-to-delete.
+- Empty artboards can be selected by clicking anywhere inside them. Populated artboards are selected by clicking their title label.
 
-### 4.2. Direct Manipulation
-Properties in the Inspector must use direct manipulation controls. Numeric values (corner radius, padding, opacity) should be adjustable via sliders or by dragging horizontally on the value field itself. Color selection should use inline swatches that expand into a full picker.
+#### 3.3.3. Code Tab
+Replaces the Library tab from Linearity. This displays the real-time SwiftUI or React code generated by the AI for the selected component.
 
-### 4.3. Empty Artboard Selection
-Following modern vector tool patterns, empty artboards can be selected by clicking anywhere inside their bounds. Once an artboard contains elements, clicking the background space will deselect current items, and the artboard itself must be selected by clicking its title label above the frame.
+## 4. The Liquid Glass Companion (Voice UI)
 
-## 5. Platform-Specific Adaptations
+The AI Companion is not a standard button; it is a living entity rendered entirely using advanced Liquid Glass effects.
 
-While the core architecture is shared, specific adaptations are required for the best experience on each platform.
+- **Visuals:** A heavily refractive, translucent orb floating on the canvas.
+- **Idle State:** Gently breathes and drifts using a slow animation curve.
+- **Listening State:** Deforms and stretches in real-time, syncing with audio input amplitude.
+- **Processing State:** Exhibits an internal swirling animation, utilizing the `dispersion` property of the `Glass` material to split light into subtle color shifts.
+- **Positioning:** Free-floating and draggable by the user. It remembers its position.
 
-### 5.1. iPadOS
-- The Floating Toolbar and Action Bar must have touch-friendly hit targets (minimum 44x44pt).
-- The Inspector panel should support swipe-to-dismiss gestures.
-- Support for Apple Pencil hover states to preview selection bounds before tapping.
+## 5. Interaction Patterns
 
-### 5.2. macOS
-- The Action Bar functionality can be partially mirrored in the standard macOS Menu Bar.
-- The Floating Toolbar can optionally be docked to the left edge as a standard sidebar if the user prefers a more traditional window layout.
-- Full keyboard shortcut support for all tools and Inspector actions.
+### 5.1. Popovers over Modals
+Following the Linearity and Essayist patterns, CanvasCode uses popovers for all secondary interactions (color pickers, font selection, citation styles). 
+
+- **Implementation:** Popovers must originate from the control that summoned them. They must use the `.glassEffect()` background and avoid obscuring the primary selection. Full-screen modals are strictly forbidden unless required for destructive actions.
+
+### 5.2. Direct Manipulation
+All properties in the Inspector must use direct manipulation controls.
+- Numeric values (padding, corner radius) must be adjustable via sliders or by dragging horizontally on the text field.
+- Controls must adopt the rounder forms dictated by the iOS 26 hardware curvature guidelines.
+
+### 5.3. Scroll Edge Effects
+If any custom scrolling list (like the Layers panel) passes beneath a fixed header within the Inspector, use the `safeAreaBar(edge:alignment:spacing:content:)` API to apply a scroll edge effect, obscuring the content beneath the header to maintain legibility.
 
 ## 6. Implementation Directives
 
-1. **Delete Existing UI:** The current `WorkspaceView`, `ConvertToolView`, and `NotebookEditorView` implementations are deprecated. They must be entirely removed and replaced with this new architecture. Do not attempt to salvage the split-view notebook paradigm.
-2. **Shared Codebase:** The UI components (Floating Toolbar, Inspector, Action Bar) must be built as shared SwiftUI views applicable to both iOS and macOS targets. Platform-specific modifiers (`#if os(macOS)`) should be used sparingly, primarily for window management and menu bar integration.
-3. **No Horizontal Scrolling in UI Panels:** The Inspector and Toolbar must be designed to fit their contents without requiring horizontal scrolling. Text should wrap, and controls should stack vertically if space is constrained.
-
-This document serves as the absolute source of truth for the CanvasCode UI layer moving forward. All visual development must adhere to these structural and philosophical guidelines.
+1. **Purge the Old UI:** The existing `WorkspaceView`, `ConvertToolView`, and `NotebookEditorView` files must be deleted. The split-view notebook paradigm is dead.
+2. **Shared Foundation:** The Toolbar, Action Bar, and Inspector must be built as shared SwiftUI views. The iPad is the reference implementation. The Mac version will inherit this layout, optionally utilizing the standard macOS Menu Bar for redundant Action Bar commands.
+3. **Performance:** Limit the number of concurrent `GlassEffectContainer` instances. Combine Liquid Glass shapes where possible to optimize rendering performance, especially on iPad. Test heavily with the "Reduce Transparency" accessibility setting enabled.
