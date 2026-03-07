@@ -111,9 +111,19 @@ The "Run" mode will present the designed UI as a fully interactive, high-fidelit
 
 The simulation covers the full UI layer: tapping buttons, navigating between screens, triggering animations, and scrolling through content. It will not connect to live backend services or databases. It is for testing user flow and visual fidelity only. The Hybrid App simulation target will launch the native SwiftUI host running the React code inside a `WKWebView`, allowing end-to-end testing of the complete hybrid experience.
 
-### 6.1. React-as-Web-App on Device
+### 6.1. React Web App Lifecycle
 
-If a user builds a React project in CanvasCode, they can run it as a local web application directly on their device via a `WKWebView`. No external server is required. The generated React code is bundled and rendered locally, providing an instant, self-contained preview of the web application. This is available on all platforms (iPhone, iPad, Mac).
+CanvasCode supports a complete lifecycle for React-based web applications, from local prototyping to live deployment:
+
+| Stage | What Happens | Where It Lives |
+| :--- | :--- | :--- |
+| **Build** | The user designs a React app visually on any device (iPhone, iPad, Mac). | In the CanvasCode project file. |
+| **Run Locally** | The React app is bundled and rendered inside a `WKWebView` directly on the device. No server, no deployment, no domain required. It just works as a self-contained app on your phone, iPad, or Mac. | Local device storage + iCloud sync. |
+| **Use It** | The user can interact with the web app as if it were a real application on their device. It persists in their storage and syncs across devices via iCloud. | Local storage + iCloud. |
+| **Deploy to Web** | When the user is ready to make it a real, publicly accessible website, they can push the bundled React project to a web host. | External web server. |
+| **Convert to Native** | If the user wants to turn it into a real native iOS/macOS app, they must open the project on a Mac, export it to Xcode, and build it through the standard native pipeline. This step cannot be done on iPhone or iPad. | Xcode on Mac. |
+
+This pipeline means a user can go from idea to functional app-on-their-phone in a single sitting, without ever touching a terminal, a server, or Xcode. The native conversion path exists for when they want to take it further.
 
 ## 7. JARVIS Core Integration
 
