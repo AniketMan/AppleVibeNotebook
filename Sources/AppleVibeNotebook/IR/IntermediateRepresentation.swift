@@ -421,7 +421,7 @@ public struct ConversionMetadata: Codable, Sendable {
     public let sourceProjectName: String
     public let sourceProjectPath: String
     public let conversionTimestamp: Date
-    public let react2SwiftUIVersion: String
+    public let appleVibeNotebookVersion: String
     public let targetPlatforms: [String]
     public let minimumSwiftVersion: String
     public let sourceStatistics: SourceStatistics
@@ -430,7 +430,7 @@ public struct ConversionMetadata: Codable, Sendable {
         sourceProjectName: String,
         sourceProjectPath: String,
         conversionTimestamp: Date = Date(),
-        react2SwiftUIVersion: String = "1.0.0",
+        appleVibeNotebookVersion: String = "1.0.0",
         targetPlatforms: [String] = ["iOS", "macOS"],
         minimumSwiftVersion: String = "6.0",
         sourceStatistics: SourceStatistics = SourceStatistics()
@@ -438,7 +438,7 @@ public struct ConversionMetadata: Codable, Sendable {
         self.sourceProjectName = sourceProjectName
         self.sourceProjectPath = sourceProjectPath
         self.conversionTimestamp = conversionTimestamp
-        self.react2SwiftUIVersion = react2SwiftUIVersion
+        self.appleVibeNotebookVersion = appleVibeNotebookVersion
         self.targetPlatforms = targetPlatforms
         self.minimumSwiftVersion = minimumSwiftVersion
         self.sourceStatistics = sourceStatistics

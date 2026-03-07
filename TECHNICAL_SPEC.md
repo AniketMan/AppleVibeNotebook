@@ -1,18 +1,18 @@
-# REACT2SWIFTUI_CANVAS_TECHNICAL_SPEC
+# APPLEVIBENOTEBOOK_TECHNICAL_SPEC
 
 ## METADATA
 ```yaml
-project_name: React2SwiftUI
-project_path: /Users/aniketbhatt/Desktop/React2SwiftUI
+project_name: AppleVibeNotebook
+project_path: /Users/aniketbhatt/Desktop/AppleVibeNotebook
 swift_tools_version: "6.0"
 platforms:
   - macOS: "26.0"
   - iOS: "26.0"
 dependencies:
   - swift-syntax: "600.0.0"
-build_command: "cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift build"
-run_command: "cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift run React2SwiftUIApp"
-test_command: "cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift test"
+build_command: "cd /Users/aniketbhatt/Desktop/AppleVibeNotebook && swift build"
+run_command: "cd /Users/aniketbhatt/Desktop/AppleVibeNotebook && swift run AppleVibeNotebookApp"
+test_command: "cd /Users/aniketbhatt/Desktop/AppleVibeNotebook && swift test"
 ```
 
 ---
@@ -21,50 +21,62 @@ test_command: "cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift test"
 
 ### PACKAGE_MANIFEST
 ```
-path: /Users/aniketbhatt/Desktop/React2SwiftUI/Package.swift
+path: /Users/aniketbhatt/Desktop/AppleVibeNotebook/Package.swift
 targets:
-  - name: React2SwiftUI
+  - name: AppleVibeNotebook
     type: library
-    path: Sources/React2SwiftUI
+    path: Sources/AppleVibeNotebook
     dependencies: [SwiftSyntax, SwiftSyntaxBuilder]
-  - name: React2SwiftUIApp
+  - name: AppleVibeNotebookApp
     type: executable
-    path: Sources/React2SwiftUIApp
-    dependencies: [React2SwiftUI]
-  - name: React2SwiftUITests
+    path: Sources/AppleVibeNotebookApp
+    dependencies: [AppleVibeNotebook]
+  - name: AppleVibeNotebookTests
     type: test
-    path: Tests/React2SwiftUITests
-    dependencies: [React2SwiftUI]
+    path: Tests/AppleVibeNotebookTests
+    dependencies: [AppleVibeNotebook]
 ```
 
 ### CORE_LIBRARY_FILES
 ```
-/Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUI/
+/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/
 ├── Parsing/
-│   ├── JSXParser.swift
+│   ├── ReactParser.swift
 │   ├── CSSParser.swift
 │   ├── FigmaFileParser.swift
 │   ├── SVGParser.swift
-│   └── ImageAssetImporter.swift
+│   ├── ImageAssetImporter.swift
+│   ├── ProjectParser.swift
+│   ├── JavaScriptRuntime.swift
+│   ├── BabelParserBundle.swift
+│   └── PostCSSParserBundle.swift
 ├── Mappings/
 │   ├── LayoutMapping.swift
 │   ├── StylingMapping.swift
-│   └── StateMapping.swift
-├── CodeGeneration/
+│   ├── StateMapping.swift
+│   └── ComponentMapping.swift
+├── CodeGen/
 │   └── SwiftSyntaxCodeGenerator.swift
+├── IR/
+│   └── IntermediateRepresentation.swift
+├── ConversionReport/
+│   └── ConversionReport.swift
 └── Models/
-    ├── IntermediateRepresentation.swift
-    └── CSSTypes.swift
+    ├── CSSTypes.swift
+    ├── ReactTypes.swift
+    └── SwiftUITypes.swift
 ```
 
 ### APP_FILES
 ```
-/Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/
-├── React2SwiftUIApp.swift          # @main, Scene, Commands
+/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebookApp/
+├── AppleVibeNotebookApp.swift          # @main, Scene, Commands
 ├── Services/
 │   ├── AICodeSuggestionService.swift
 │   ├── AIProviders.swift
-│   └── ImageToUIService.swift
+│   ├── ImageToUIService.swift
+│   ├── ScreenCaptureService.swift
+│   └── VoiceInputService.swift
 └── Views/
     ├── ContentView.swift
     ├── WelcomeView.swift
@@ -84,7 +96,7 @@ targets:
 
 ### AIProvider
 ```swift
-// File: /Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/Services/AIProviders.swift
+// File: /Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebookApp/Services/AIProviders.swift
 
 public enum AIProvider: String, CaseIterable, Identifiable, Codable, Sendable {
     case apple = "Apple Intelligence"
@@ -108,11 +120,11 @@ public enum AIProvider: String, CaseIterable, Identifiable, Codable, Sendable {
 
 ### APIKeyStorage
 ```swift
-// File: /Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/Services/AIProviders.swift
+// File: /Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebookApp/Services/AIProviders.swift
 
 public final class APIKeyStorage: Sendable {
     public static let shared = APIKeyStorage()
-    private let servicePrefix = "com.react2swiftui.apikey."
+    private let servicePrefix = "com.applevibenotebook.apikey."
 
     public func setAPIKey(_ key: String, for provider: AIProvider) throws
     public func getAPIKey(for provider: AIProvider) -> String?
@@ -120,12 +132,12 @@ public final class APIKeyStorage: Sendable {
     public func hasAPIKey(for provider: AIProvider) -> Bool
 }
 // Storage: macOS Keychain via Security.framework
-// Key format: "com.react2swiftui.apikey.{provider.rawValue}"
+// Key format: "com.applevibenotebook.apikey.{provider.rawValue}"
 ```
 
 ### AIProviderSettings
 ```swift
-// File: /Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/Services/AIProviders.swift
+// File: /Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebookApp/Services/AIProviders.swift
 
 @Observable
 @MainActor
@@ -142,7 +154,7 @@ public final class AIProviderSettings {
 
 ### AICodeSuggestionService
 ```swift
-// File: /Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/Services/AICodeSuggestionService.swift
+// File: /Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebookApp/Services/AICodeSuggestionService.swift
 
 @Observable
 @MainActor
@@ -200,7 +212,7 @@ public final class AICodeSuggestionService {
 
 ### ImageToUIService
 ```swift
-// File: /Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/Services/ImageToUIService.swift
+// File: /Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebookApp/Services/ImageToUIService.swift
 
 @Observable
 @MainActor
@@ -248,7 +260,7 @@ public final class ImageToUIService {
 
 ### AppState
 ```swift
-// File: /Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/React2SwiftUIApp.swift
+// File: /Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebookApp/AppleVibeNotebookApp.swift
 
 @Observable
 final class AppState {
@@ -395,14 +407,14 @@ Menu Commands:
 ## KEYCHAIN_STORAGE
 
 ```
-Service prefix: "com.react2swiftui.apikey."
+Service prefix: "com.applevibenotebook.apikey."
 Key names:
-  - "com.react2swiftui.apikey.Apple Intelligence"
-  - "com.react2swiftui.apikey.OpenAI (ChatGPT)"
-  - "com.react2swiftui.apikey.Anthropic (Claude)"
-  - "com.react2swiftui.apikey.xAI (Grok)"
-  - "com.react2swiftui.apikey.Google (Gemini)"
-  - "com.react2swiftui.apikey.GitHub MCP"
+  - "com.applevibenotebook.apikey.Apple Intelligence"
+  - "com.applevibenotebook.apikey.OpenAI (ChatGPT)"
+  - "com.applevibenotebook.apikey.Anthropic (Claude)"
+  - "com.applevibenotebook.apikey.xAI (Grok)"
+  - "com.applevibenotebook.apikey.Google (Gemini)"
+  - "com.applevibenotebook.apikey.GitHub MCP"
 
 Security attributes:
   kSecClass: kSecClassGenericPassword
@@ -457,7 +469,7 @@ Security attributes:
 actions:
   - action: FIX_BUILD_ERROR
     file: FigmaAssetBrowserView.swift
-    change: "added import React2SwiftUI"
+    change: "added import AppleVibeNotebook"
 
   - action: FIX_BUILD_ERROR
     file: FigmaAssetBrowserView.swift
@@ -511,23 +523,45 @@ actions:
     description: "vision model service for image→UI code generation"
 ```
 
+### 2026-03-07_SESSION_3
+
+```yaml
+actions:
+  - action: REBRAND
+    description: "Renamed project from React2SwiftUI to AppleVibeNotebook"
+    files_updated:
+      - DEVELOPMENT.md
+      - TECHNICAL_SPEC.md
+      - IntermediateRepresentation.swift
+      - SwiftSyntaxCodeGenerator.swift
+      - ConversionReport.swift
+      - NeonLiquidGlass.swift
+      - FigmaAssetBrowserView.swift
+      - SettingsView.swift
+      - ImageAssetImporter.swift
+
+  - action: GIT_INIT
+    description: "Initialized git repository and pushed to GitHub"
+    remote: "https://github.com/AniketMan/AppleVibeNotebook"
+```
+
 ---
 
 ## COMMAND_REFERENCE
 
 ```bash
 # Build
-cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift build
+cd /Users/aniketbhatt/Desktop/AppleVibeNotebook && swift build
 
 # Run
-cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift run React2SwiftUIApp
+cd /Users/aniketbhatt/Desktop/AppleVibeNotebook && swift run AppleVibeNotebookApp
 
 # Test
-cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift test
+cd /Users/aniketbhatt/Desktop/AppleVibeNotebook && swift test
 
 # Clean
-cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift package clean
+cd /Users/aniketbhatt/Desktop/AppleVibeNotebook && swift package clean
 
 # Update dependencies
-cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift package update
+cd /Users/aniketbhatt/Desktop/AppleVibeNotebook && swift package update
 ```

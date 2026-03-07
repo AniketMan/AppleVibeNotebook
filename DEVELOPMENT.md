@@ -121,7 +121,7 @@ API keys are stored securely in **macOS Keychain**:
 ```swift
 // AIProviders.swift
 public final class APIKeyStorage: Sendable {
-    private let servicePrefix = "com.react2swiftui.apikey."
+    private let servicePrefix = "com.applevibenotebook.apikey."
 
     public func setAPIKey(_ key: String, for provider: AIProvider) throws {
         // Uses SecItemAdd with kSecClassGenericPassword
@@ -174,9 +174,9 @@ public final class APIKeyStorage: Sendable {
 ## 🚀 How to Run
 
 ```bash
-cd /Users/aniketbhatt/Desktop/React2SwiftUI
+cd /Users/aniketbhatt/Desktop/AppleVibeNotebook
 swift build
-swift run React2SwiftUIApp
+swift run AppleVibeNotebookApp
 ```
 
 ---
@@ -192,7 +192,7 @@ swift run React2SwiftUIApp
 ### Session 2 (Current - March 7, 2026)
 
 1. **Fixed build errors**
-   - Added `import React2SwiftUI` to FigmaAssetBrowserView
+   - Added `import AppleVibeNotebook` to FigmaAssetBrowserView
    - Fixed glassEffect API usage
    - Fixed recursive view type with AnyView wrapper
 
