@@ -1,533 +1,75 @@
-# REACT2SWIFTUI_CANVAS_TECHNICAL_SPEC
+# CanvasCode: Technical Specification & Requirements
 
-## METADATA
-```yaml
-project_name: React2SwiftUI
-project_path: /Users/aniketbhatt/Desktop/React2SwiftUI
-swift_tools_version: "6.0"
-platforms:
-  - macOS: "26.0"
-  - iOS: "26.0"
-dependencies:
-  - swift-syntax: "600.0.0"
-build_command: "cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift build"
-run_command: "cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift run React2SwiftUIApp"
-test_command: "cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift test"
-```
+**Project Codename:** CanvasCode
+**Tier:** 0 (Flagship Product)
+**Status:** Blueprint
+**Owner:** Master Control
 
----
+## 1. Vision
 
-## FILE_INDEX
+CanvasCode is a next-generation, AI-native design and development environment for creating beautiful, production-ready applications for both the Apple and web ecosystems. It abandons traditional, rigid coding workflows in favor of a fluid, intuitive, and "vibe-driven" creative process. Users can design visually, speak naturally, or even show the AI a picture, and CanvasCode will translate that intent into clean, exportable Swift and React code in real-time.
 
-### PACKAGE_MANIFEST
-```
-path: /Users/aniketbhatt/Desktop/React2SwiftUI/Package.swift
-targets:
-  - name: React2SwiftUI
-    type: library
-    path: Sources/React2SwiftUI
-    dependencies: [SwiftSyntax, SwiftSyntaxBuilder]
-  - name: React2SwiftUIApp
-    type: executable
-    path: Sources/React2SwiftUIApp
-    dependencies: [React2SwiftUI]
-  - name: React2SwiftUITests
-    type: test
-    path: Tests/React2SwiftUITests
-    dependencies: [React2SwiftUI]
-```
+It is designed from the ground up to be a showcase for Apple's on-device intelligence, leveraging the full power of the Apple Silicon ecosystem to provide a private, efficient, and deeply integrated experience. It is not just a tool; it is a creative partner.
 
-### CORE_LIBRARY_FILES
-```
-/Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUI/
-├── Parsing/
-│   ├── JSXParser.swift
-│   ├── CSSParser.swift
-│   ├── FigmaFileParser.swift
-│   ├── SVGParser.swift
-│   └── ImageAssetImporter.swift
-├── Mappings/
-│   ├── LayoutMapping.swift
-│   ├── StylingMapping.swift
-│   └── StateMapping.swift
-├── CodeGeneration/
-│   └── SwiftSyntaxCodeGenerator.swift
-└── Models/
-    ├── IntermediateRepresentation.swift
-    └── CSSTypes.swift
-```
+## 2. Core Principles
 
-### APP_FILES
-```
-/Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/
-├── React2SwiftUIApp.swift          # @main, Scene, Commands
-├── Services/
-│   ├── AICodeSuggestionService.swift
-│   ├── AIProviders.swift
-│   └── ImageToUIService.swift
-└── Views/
-    ├── ContentView.swift
-    ├── WelcomeView.swift
-    ├── WorkspaceView.swift
-    ├── SidebarView.swift
-    ├── AISuggestionPanelView.swift
-    ├── APISettingsView.swift
-    ├── FigmaAssetBrowserView.swift
-    ├── NeonLiquidGlass.swift
-    ├── ProcessingOverlay.swift
-    └── SettingsView.swift
-```
+-   **Visual-First, Code-Aware:** The primary interface is a visual canvas, reminiscent of professional creative tools like Procreate. However, every visual element is backed by real code, which is always accessible and editable.
+-   **AI-Native & On-Device First:** The application's intelligence is powered by Apple's Foundation Models, running directly on the user's device. This ensures privacy, speed, and offline capability. Cloud-based models (like ChatGPT) are available as an optional, explicitly-disclosed alternative.
+-   **Ethical AI Positioning:** The app will transparently communicate the benefits of on-device processing (privacy, efficiency, lower carbon footprint) versus cloud-based models, empowering users to make an informed choice.
+-   **Seamless Cross-Platform Experience:** Projects are synced via iCloud and the experience is tailored to the strengths of each device (iPhone, iPad, Mac), with deep integration of Apple's Continuity features.
+-   **Self-Extensible System (JARVIS Core):** The CanvasCode engine will be a core competency of the JARVIS system, allowing JARVIS to programmatically design and generate UIs for its own modules and tools.
 
----
+## 3. Platform-Specific Strategy
 
-## TYPE_DEFINITIONS
+CanvasCode will be delivered as a unified experience across three tiers of Apple hardware, each with a specific focus:
 
-### AIProvider
-```swift
-// File: /Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/Services/AIProviders.swift
+| Platform | Primary Role | Key Features |
+| :--- | :--- | :--- |
+| **iPhone** | **Capture & Ideation** | A lightweight, voice-first interface for capturing UI ideas on the go. Users can describe a UI, and the app generates the initial Swift code and syncs it to iCloud. |
+| **iPad** | **Visual Design & Refinement** | The primary creative canvas. A touch-and-Pencil-first experience for visually designing, arranging, and styling components. Full access to AI features. |
+| **Mac** | **Full Development Studio** | Includes the complete visual canvas of the iPad app, plus a powerful, integrated code editor and deep developer-focused features. The ultimate environment for finalizing and exporting projects. |
 
-public enum AIProvider: String, CaseIterable, Identifiable, Codable, Sendable {
-    case apple = "Apple Intelligence"
-    case openai = "OpenAI (ChatGPT)"
-    case anthropic = "Anthropic (Claude)"
-    case xai = "xAI (Grok)"
-    case google = "Google (Gemini)"
-    case github = "GitHub MCP"
+## 4. Key Features & Technical Implementation
 
-    var iconName: String
-    var requiresAPIKey: Bool
-    var apiKeyPlaceholder: String
-    var helpURL: URL?
-    var baseURL: String
-    var defaultModel: String
-    var visionModel: String?
-    var supportsVision: Bool
-    var availableModels: [String]
-}
-```
+### 4.1. Core Functionality
 
-### APIKeyStorage
-```swift
-// File: /Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/Services/AIProviders.swift
+-   **Visual Canvas:** A freeform, infinite canvas where users can draw, arrange, and style UI components. The UI will be intuitive and gesture-based, avoiding the rigidity of traditional design tools.
+-   **Real-time Code Generation:** All visual manipulations on the canvas will be instantly translated into both SwiftUI and React code, visible in a side-by-side or tabbed view.
+-   **Dual-Platform Export:** Users can export their project in three distinct formats:
+    -   **Pure Swift:** A clean, production-ready, and buildable Xcode project.
+    -   **Pure React:** A set of organized React components (`.tsx` files) for web projects.
+    -   **Hybrid Component:** A self-contained SwiftUI View that wraps a `WKWebView` pointing to the generated React code. This component can be dropped into any existing native iOS project, allowing the React portion to handle its own backend service connections independently.
+-   **Live Simulation Environment:** A "Run" mode that presents the designed UI as a fully interactive, high-fidelity simulation. This allows for testing the user flow and visual fidelity of the front-end directly within the app. The simulation targets will be platform-specific and will include a new **Hybrid App** target. This will launch a simulation of the native SwiftUI host app running the React code inside a `WKWebView`, allowing for end-to-end testing of the complete hybrid experience.
 
-public final class APIKeyStorage: Sendable {
-    public static let shared = APIKeyStorage()
-    private let servicePrefix = "com.react2swiftui.apikey."
+### 4.2. AI-Powered Inputs & Generation
 
-    public func setAPIKey(_ key: String, for provider: AIProvider) throws
-    public func getAPIKey(for provider: AIProvider) -> String?
-    public func deleteAPIKey(for provider: AIProvider)
-    public func hasAPIKey(for provider: AIProvider) -> Bool
-}
-// Storage: macOS Keychain via Security.framework
-// Key format: "com.react2swiftui.apikey.{provider.rawValue}"
-```
+-   **Voice-to-UI:** Leveraging the `FoundationModels` framework, users can describe UI layouts and components in natural language (e.g., "Create a login screen with a logo, two text fields, and a button").
+-   **Image-to-UI:** Using `VisionKit` and the multimodal capabilities of the on-device model, users can take a picture of a hand-drawn sketch or a whiteboard wireframe, and the app will generate the corresponding UI code.
 
-### AIProviderSettings
-```swift
-// File: /Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/Services/AIProviders.swift
+### 4.3. Deep Apple Ecosystem Integration
 
-@Observable
-@MainActor
-public final class AIProviderSettings {
-    public static let shared = AIProviderSettings()
+-   **Foundation Models Framework:** This is the heart of the app's intelligence. We will use `SystemLanguageModel` for all language tasks, `@Generable` for structured data output, and the `Tool` protocol to allow the model to interact with app features.
+-   **Visual Intelligence:** With user permission, the app will leverage the system's ability to understand on-screen content, allowing users to reference elements from other apps in their designs.
+-   **Native Continuity Suite:**
+    -   **Handoff:** Start a design on an iPhone and seamlessly continue on an iPad or Mac.
+    -   **Sidecar:** Use an iPad as a live, interactive preview canvas for the Mac app.
+    -   **Universal Control:** Use a single keyboard and mouse to control the app running on both a Mac and an iPad simultaneously.
+    -   **Continuity Camera:** Instantly pull photos of sketches from an iPhone into a project on a Mac or iPad.
+-   **iCloud Sync:** All projects, components, and assets will be stored in iCloud Drive, ensuring they are always available and up-to-date across all of the user's devices.
 
-    public var selectedProvider: AIProvider  // UserDefaults: "selectedAIProvider"
-    public var selectedModels: [AIProvider: String]  // UserDefaults: "selectedAIModels"
+### 4.4. Developer-Focused Features (Mac App)
 
-    public func selectedModel(for provider: AIProvider) -> String
-    public func setSelectedModel(_ model: String, for provider: AIProvider)
-}
-```
+-   **One-Click Xcode Project:** A button to generate and open a complete, buildable Xcode project from the current canvas design.
+-   **Remote Build & Preview:** The ability to trigger a build process on a remote machine (e.g., the user's primary development Mac) directly from the iPad or iPhone app.
 
-### AICodeSuggestionService
-```swift
-// File: /Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/Services/AICodeSuggestionService.swift
+## 5. JARVIS Core Integration
 
-@Observable
-@MainActor
-public final class AICodeSuggestionService {
+CanvasCode will not be just a standalone app; its engine will be a fundamental, extensible component of the JARVIS system.
 
-    public enum SuggestionType: String, Sendable {
-        case completion, conversion, optimization, explanation, fix
-    }
+-   **Programmatic UI Generation:** JARVIS will have an internal API to access the CanvasCode engine. This will allow JARVIS to dynamically generate user interfaces for its own modules, create new ad-hoc tools, or even modify its own settings UI.
+-   **Self-Modification:** This creates a powerful feedback loop where JARVIS can design, build, and deploy new versions of its own tools and interfaces in response to user needs or system changes.
 
-    public struct CodeSuggestion: Identifiable, Sendable {
-        public let id: UUID
-        public let type: SuggestionType
-        public let originalCode: String
-        public let suggestedCode: String
-        public let explanation: String
-        public let confidence: Double
-        public let timestamp: Date
-        public let provider: AIProvider
-    }
+## 6. Architectural Clarifications
 
-    public enum ModelState: Sendable {
-        case notLoaded, checking, ready, generating
-        case unavailable(String), error(String)
-    }
-
-    // Properties
-    public private(set) var modelState: ModelState
-    public private(set) var suggestions: [CodeSuggestion]
-    public private(set) var tokensPerSecond: Double
-    public var currentProvider: AIProvider
-    public var currentModel: String
-
-    // Apple Foundation Models session
-    private var appleSession: LanguageModelSession?
-
-    // Methods
-    public func checkAvailability() async
-    public func suggest(code: String, type: SuggestionType, context: String?) async throws -> CodeSuggestion
-    public func convertReactToSwiftUI(reactCode: String, cssCode: String?) async throws -> CodeSuggestion
-    public func complete(partialCode: String) async throws -> CodeSuggestion
-    public func explain(swiftUICode: String) async throws -> CodeSuggestion
-    public func optimize(swiftUICode: String) async throws -> CodeSuggestion
-    public func cancelGeneration()
-    public func clearHistory()
-
-    // Provider implementations
-    private func generateWithApple(code: String, type: SuggestionType, context: String?) async throws -> String
-    private func generateWithOpenAI(code: String, type: SuggestionType, context: String?) async throws -> String
-    private func generateWithAnthropic(code: String, type: SuggestionType, context: String?) async throws -> String
-    private func generateWithXAI(code: String, type: SuggestionType, context: String?) async throws -> String
-    private func generateWithGoogle(code: String, type: SuggestionType, context: String?) async throws -> String
-    private func generateWithGitHub(code: String, type: SuggestionType, context: String?) async throws -> String
-}
-```
-
-### ImageToUIService
-```swift
-// File: /Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/Services/ImageToUIService.swift
-
-@Observable
-@MainActor
-public final class ImageToUIService {
-
-    public enum OutputFormat: String, CaseIterable, Identifiable, Sendable {
-        case swiftUI, react, both
-    }
-
-    public struct GeneratedUI: Identifiable, Sendable {
-        public let id: UUID
-        public let imageData: Data
-        public let swiftUICode: String?
-        public let reactCode: String?
-        public let description: String
-        public let provider: AIProvider
-        public let timestamp: Date
-    }
-
-    public enum ServiceState: Sendable {
-        case idle, analyzing, generating, complete, error(String)
-    }
-
-    // Properties
-    public private(set) var state: ServiceState
-    public private(set) var currentImage: Data?
-    public private(set) var generatedResults: [GeneratedUI]
-    public private(set) var progress: String
-    public var selectedProvider: AIProvider
-    public var outputFormat: OutputFormat
-
-    // Methods
-    public func generateFromImage(_ imageData: Data, format: OutputFormat?) async throws -> GeneratedUI
-    public func generateFromFile(_ url: URL) async throws -> GeneratedUI
-    public func generateFromNSImage(_ image: NSImage) async throws -> GeneratedUI
-    public func clearResults()
-
-    // Vision API implementations
-    private func generateWithOpenAI(imageData: Data, format: OutputFormat) async throws -> String
-    private func generateWithAnthropic(imageData: Data, format: OutputFormat) async throws -> String
-    private func generateWithGoogle(imageData: Data, format: OutputFormat) async throws -> String
-    private func generateWithXAI(imageData: Data, format: OutputFormat) async throws -> String
-}
-```
-
-### AppState
-```swift
-// File: /Users/aniketbhatt/Desktop/React2SwiftUI/Sources/React2SwiftUIApp/React2SwiftUIApp.swift
-
-@Observable
-final class AppState {
-    var projectURL: URL?
-    var projectName: String
-    var isProcessing: Bool
-    var processingProgress: Double
-    var processingStatus: String
-    var sourceFiles: [SourceFileInfo]
-    var selectedFile: SourceFileInfo?
-    var generatedCode: [GeneratedFileInfo]
-    var selectedGeneratedFile: GeneratedFileInfo?
-    var conversionReport: ConversionReportInfo?
-    var showImportPanel: Bool
-    var showZipImportPanel: Bool
-    var showExportPanel: Bool
-    var showCodePanel: Bool
-    var showPreviewPanel: Bool
-    var showReportPanel: Bool
-    var showAIPanel: Bool
-    var errorMessage: String?
-    var showError: Bool
-}
-```
-
----
-
-## API_CONTRACTS
-
-### APPLE_FOUNDATION_MODELS
-```swift
-import FoundationModels
-
-// Initialization
-let model = SystemLanguageModel()
-let session = LanguageModelSession(model: model)
-
-// Generation
-let response: LanguageModelSession.Response<String> = try await session.respond(to: prompt)
-let text = response.content
-```
-
-### OPENAI_API
-```
-POST https://api.openai.com/v1/chat/completions
-Headers:
-  Authorization: Bearer {api_key}
-  Content-Type: application/json
-Body:
-  model: "gpt-4o"
-  messages: [{role, content}]
-  max_tokens: 4096
-
-Vision body content:
-  [
-    {type: "text", text: prompt},
-    {type: "image_url", image_url: {url: "data:image/png;base64,{base64}", detail: "high"}}
-  ]
-```
-
-### ANTHROPIC_API
-```
-POST https://api.anthropic.com/v1/messages
-Headers:
-  x-api-key: {api_key}
-  anthropic-version: 2023-06-01
-  Content-Type: application/json
-Body:
-  model: "claude-sonnet-4-20250514"
-  max_tokens: 4096
-  system: {system_prompt}
-  messages: [{role, content}]
-
-Vision body content:
-  [
-    {type: "image", source: {type: "base64", media_type: "image/png", data: base64}},
-    {type: "text", text: prompt}
-  ]
-```
-
-### GOOGLE_GEMINI_API
-```
-POST https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}
-Headers:
-  Content-Type: application/json
-Body:
-  contents: [{parts: [{text: prompt}]}]
-  generationConfig: {temperature: 0.3}
-
-Vision body:
-  contents: [{parts: [{text: prompt}, {inline_data: {mime_type: "image/png", data: base64}}]}]
-```
-
-### XAI_GROK_API
-```
-POST https://api.x.ai/v1/chat/completions
-Headers:
-  Authorization: Bearer {api_key}
-  Content-Type: application/json
-Body:
-  model: "grok-2" or "grok-2-vision"
-  messages: [{role, content}]
-  max_tokens: 4096
-```
-
----
-
-## NAVIGATION_STRUCTURE
-
-```
-App Launch
-├── No project loaded
-│   ├── WelcomeView (default)
-│   │   ├── Import React Project → FileImporter
-│   │   ├── Import from ZIP → FileImporter
-│   │   └── AI Code Assistant → AISuggestionPanelView
-│   └── AISuggestionPanelView (when showAIPanel && projectURL == nil)
-│
-└── Project loaded
-    └── WorkspaceView
-        ├── CodePanelView (showCodePanel)
-        ├── PreviewPanelView (showPreviewPanel)
-        ├── ReportPanelView (showReportPanel)
-        └── AISuggestionPanelView (showAIPanel)
-
-Sidebar (always visible)
-├── AI Assistant section
-│   └── Code Assistant toggle → showAIPanel
-├── Source Files section (when sourceFiles not empty)
-└── Generated SwiftUI section (when generatedCode not empty)
-
-Menu Commands:
-├── ⌘O: Import React Project
-├── ⇧⌘O: Import from ZIP
-├── ⌘E: Export SwiftUI Code
-├── ⌘1: Toggle Code Panel
-├── ⌘2: Toggle Preview Panel
-├── ⌘3: Toggle Report Panel
-└── ⌘4: Toggle AI Assistant
-```
-
----
-
-## KEYCHAIN_STORAGE
-
-```
-Service prefix: "com.react2swiftui.apikey."
-Key names:
-  - "com.react2swiftui.apikey.Apple Intelligence"
-  - "com.react2swiftui.apikey.OpenAI (ChatGPT)"
-  - "com.react2swiftui.apikey.Anthropic (Claude)"
-  - "com.react2swiftui.apikey.xAI (Grok)"
-  - "com.react2swiftui.apikey.Google (Gemini)"
-  - "com.react2swiftui.apikey.GitHub MCP"
-
-Security attributes:
-  kSecClass: kSecClassGenericPassword
-  kSecAttrAccessible: kSecAttrAccessibleWhenUnlocked
-```
-
----
-
-## USERDEFAULTS_KEYS
-
-```
-"selectedAIProvider": String (AIProvider.rawValue)
-"selectedAIModels": [String: String] (AIProvider.rawValue -> model name)
-```
-
----
-
-## KNOWN_ISSUES
-
-```yaml
-- id: FOUNDATION_MODELS_CATCH
-  file: AICodeSuggestionService.swift
-  line: 118
-  warning: "'catch' block is unreachable because no errors are thrown in 'do' block"
-  reason: SystemLanguageModel() does not throw in current beta
-  status: ACCEPTED
-```
-
----
-
-## PENDING_IMPLEMENTATION
-
-```yaml
-- feature: ImageToUIPanelView
-  description: UI for drag-drop image upload and display generated code
-  dependencies: [ImageToUIService]
-  integrate_into: [ContentView, SidebarView, WorkspaceView]
-
-- feature: Apple Vision in ImageToUIService
-  description: Use Apple Foundation Models vision capabilities
-  blocker: Need to research correct API for image input
-  current_status: throws providerDoesNotSupportVision
-```
-
----
-
-## SESSION_LOG
-
-### 2026-03-07_SESSION_2
-
-```yaml
-actions:
-  - action: FIX_BUILD_ERROR
-    file: FigmaAssetBrowserView.swift
-    change: "added import React2SwiftUI"
-
-  - action: FIX_BUILD_ERROR
-    file: FigmaAssetBrowserView.swift
-    change: "changed .glassEffect(.regular.cornerRadius()) to .containerShape().glassEffect()"
-
-  - action: FIX_BUILD_ERROR
-    file: FigmaAssetBrowserView.swift
-    change: "wrapped recursive nodeRow call in AnyView()"
-
-  - action: ADD_FEATURE
-    file: FigmaFileParser.swift
-    change: "added ZSTD decompression for canvas.fig files"
-    method: "shell out to system zstd tool"
-
-  - action: CREATE_FILE
-    file: SVGParser.swift
-    description: "parse SVG files to SwiftUI Path code"
-
-  - action: CREATE_FILE
-    file: ImageAssetImporter.swift
-    description: "import images and generate Asset Catalog + SwiftUI code"
-
-  - action: REFACTOR
-    file: AICodeSuggestionService.swift
-    change: "switched from MLX to Apple Foundation Models"
-    reason: "MLX required downloading models from HuggingFace"
-
-  - action: CREATE_FILE
-    file: AIProviders.swift
-    description: "AIProvider enum, APIKeyStorage (Keychain), AIProviderSettings"
-
-  - action: REFACTOR
-    file: AICodeSuggestionService.swift
-    change: "added multi-provider support"
-    providers: [apple, openai, anthropic, xai, google, github]
-
-  - action: CREATE_FILE
-    file: APISettingsView.swift
-    description: "UI for managing API keys with test connection"
-
-  - action: UPDATE
-    file: AISuggestionPanelView.swift
-    change: "added provider picker and settings sheet"
-
-  - action: UPDATE
-    file: Package.swift
-    change: "removed MLX dependencies, changed platform to macOS 26.0"
-
-  - action: CREATE_FILE
-    file: ImageToUIService.swift
-    description: "vision model service for image→UI code generation"
-```
-
----
-
-## COMMAND_REFERENCE
-
-```bash
-# Build
-cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift build
-
-# Run
-cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift run React2SwiftUIApp
-
-# Test
-cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift test
-
-# Clean
-cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift package clean
-
-# Update dependencies
-cd /Users/aniketbhatt/Desktop/React2SwiftUI && swift package update
-```
+-   **Export Limitation:** The React export will be limited to the UI component structure and styling. It will **not** and **cannot** transpile the deep native Swift logic that powers the `FoundationModels` integration, Continuity features, or other system-level APIs. This distinction will be made clear to the user during the export process.
+-   **Repo Rename:** The GitHub repository `AniketMan/AppleVibeNotebook` should be renamed to `AniketMan/CanvasCode` to reflect the new project vision.
