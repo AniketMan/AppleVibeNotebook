@@ -201,11 +201,42 @@ CanvasCode will not be just a standalone app; its engine will be a fundamental, 
 -   **Export Limitation:** The React export will be limited to the UI component structure and styling. It will **not** and **cannot** transpile the deep native Swift logic that powers the `FoundationModels` integration, Continuity features, or other system-level APIs. This distinction will be made clear to the user during the export process.
 -   **Repo Name:** The repository remains `AniketMan/AppleVibeNotebook`. The internal project codename is **CanvasCode**.
 
-## 9. Apple Human Interface Guidelines Compliance
+## 9. Generative AI Policy
+
+> **NO GENERATIVE IMAGE AI. NO DIFFUSION MODELS. NO IMAGE GENERATION OF ANY KIND. THIS IS NON-NEGOTIABLE. THIS IS A CORE VALUE OF THE APPLICATION. DO NOT IMPLEMENT, INTEGRATE, SUGGEST, OR ENABLE ANY FEATURE THAT GENERATES IMAGES USING AI. THIS INCLUDES BUT IS NOT LIMITED TO: STABLE DIFFUSION, DALL-E, MIDJOURNEY, APPLE'S IMAGE PLAYGROUND, FLUX, OR ANY OTHER DIFFUSION-BASED OR GAN-BASED IMAGE GENERATION MODEL. ZERO EXCEPTIONS.**
+
+### 9.1. What Is Allowed
+
+-   **LLM-based code generation:** The Foundation Models framework, ChatGPT, Claude, and other language models are used to write code. This is math applied to text. No one's art is being stolen. The user's voice and text are the input; structured code is the output. This is the core of the app.
+-   **LLM-based coding assistants:** Third-party API keys for Claude, GPT, etc. can be connected for code assistance, debugging, and iteration. These are language models helping write code.
+-   **Vision models for input:** VisionKit and Visual Intelligence are used to *read* images (e.g., a photo of a whiteboard sketch) and convert them to code. This is computer vision, not generation. The model is interpreting what it sees, not creating new images.
+
+### 9.2. What Is NOT Allowed
+
+-   **No image generation.** Period. No diffusion models, no GANs, no AI-generated images of any kind, anywhere in the app.
+-   **No Apple Image Playground integration.** Apple's generative image model will not be integrated, referenced, or suggested.
+-   **No AI-generated assets.** Users cannot use CanvasCode to generate icons, illustrations, backgrounds, or any visual assets via AI.
+
+### 9.3. Generative AI Detection & Discouragement
+
+If a user attempts to import an image that contains detectable generative AI watermarks (e.g., Gemini, DALL-E, Midjourney metadata, C2PA provenance data indicating AI generation), the app will:
+
+1.  Flag the image with a clear, non-aggressive but firm message. The tone should be encouraging and creative, not hostile. Example: *"This image appears to be AI-generated. CanvasCode is built for human creativity. We encourage you to use your own artwork, photography, or hand-drawn sketches. Your ideas are worth more than a prompt."*
+2.  Allow the user to proceed if they choose (we are not gatekeepers), but the message will always appear. It cannot be permanently dismissed or turned off.
+3.  In the app's documentation and onboarding, clearly communicate the philosophy: *"When you use the Apple Foundation Model in CanvasCode, you are not stealing from anyone. You are using your voice as an input for math. The model writes code, not art. That distinction matters to us."*
+
+### 9.4. Third-Party API Key Policy
+
+Users can connect their own API keys for:
+-   **Language models** (ChatGPT, Claude, Gemini, etc.) — for code generation and assistance. Allowed.
+-   **Coding assistants** (Copilot, Cursor-style tools) — for code iteration. Allowed.
+-   **Diffusion models or image generators** — **NOT ALLOWED.** The app will not provide any interface, field, or mechanism to connect to image generation APIs. There is no "add your Midjourney key" option. It does not exist.
+
+## 10. Apple Human Interface Guidelines Compliance
 
 The entire application will be built in strict adherence to Apple's Human Interface Guidelines (HIG). This is a non-negotiable requirement. All navigation patterns, touch targets, typography scales, spacing, safe area insets, Dynamic Type support, and accessibility features will conform to Apple's published specifications. No custom navigation hacks, no non-standard gestures, no deviations. If Apple's guidelines specify a behavior, CanvasCode will implement it exactly.
 
-## 10. Performance Requirements
+## 11. Performance Requirements
 
 Performance is a first-class requirement, not an afterthought. The application will be optimized specifically for Apple Silicon hardware.
 
