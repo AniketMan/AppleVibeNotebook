@@ -19,7 +19,21 @@ It is designed from the ground up to be a showcase for Apple's on-device intelli
 -   **Seamless Cross-Platform Experience:** Projects are synced via iCloud and the experience is tailored to the strengths of each device (iPhone, iPad, Mac), with deep integration of Apple's Continuity features.
 -   **Self-Extensible System (JARVIS Core):** The CanvasCode engine will be a core competency of the JARVIS system, allowing JARVIS to programmatically design and generate UIs for its own modules and tools.
 
-## 3. Platform-Specific Strategy
+## 3. Development Priority & Platform Strategy
+
+### 3.1. Build Order
+
+> **ALL CODE THAT IS SHARED BETWEEN THE iPAD APP AND THE MAC APP MUST BE WRITTEN AS SHARED, PLATFORM-AGNOSTIC CODE FROM THE START. DO NOT WRITE iPAD-SPECIFIC CODE THAT WILL NEED TO BE REWRITTEN FOR MAC. USE SHARED SWIFT PACKAGES, SHARED VIEW MODELS, AND SHARED BUSINESS LOGIC FROM DAY ONE. THE ONLY PLATFORM-SPECIFIC CODE SHOULD BE FOR UI DIFFERENCES THAT GENUINELY REQUIRE IT (e.g., MENU BAR ON MAC, PENCIL INPUT ON iPAD). THIS IS NON-NEGOTIABLE.**
+
+The development priority order is:
+
+| Priority | Platform | Focus |
+| :--- | :--- | :--- |
+| **1st** | **iPad** | Primary target. All core functionality, Apple Intelligence integration, visual tooling, component system, simulation, and React web app lifecycle. The iPad app is the reference implementation. |
+| **2nd** | **iPhone** | Voice-first capture interface. Lighter UI, same shared codebase for AI, components, and iCloud sync. |
+| **3rd** | **Mac** | Full studio with Mac-specific features: One-Click Xcode export, menu bar integration, keyboard shortcuts, windowed layout. Built on top of the shared codebase from the iPad app. The iPad app can already run on Mac via Catalyst/Designed for iPad, so the Mac-specific work is additive, not a rewrite. |
+
+### 3.2. Platform Roles
 
 CanvasCode will be delivered as a unified experience across three tiers of Apple hardware, each with a specific focus:
 
