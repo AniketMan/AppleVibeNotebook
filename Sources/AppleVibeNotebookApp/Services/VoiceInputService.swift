@@ -138,8 +138,10 @@ public final class VoiceInputService: NSObject, ObservableObject {
         }
 
         // Install audio tap - this callback runs on audio thread
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] buffer, _ in
-            self?.recognitionRequest?.append(buffer)
+        // Use DispatchQueue.main.async to avoid actor isolation issues with @MainActor class
+        inputNode.installTap(onBus: 0, bufferSize: 0, format: recordingFormat) { [weak self] buffer, _ in
+            guard let self = self else { return }
+            self.recognitionRequest?.append(buffer)
 
             // Calculate audio level from buffer
             let channelData = buffer.floatChannelData?[0]
@@ -147,25 +149,32 @@ public final class VoiceInputService: NSObject, ObservableObject {
             let rms = sqrt(channelDataValueArray.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
             let level = rms * 10
 
-            // Update on main actor
-            Task { @MainActor [weak self] in
+            // Update audio level on main thread using GCD (avoids actor isolation crash)
+            DispatchQueue.main.async { [weak self] in
                 self?.audioLevel = level
             }
         }
 
-        // Start recognition task
+        // Start recognition task - callback runs on background queue
+        // Use DispatchQueue.main.async to avoid actor isolation issues
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { [weak self] result, error in
-            Task { @MainActor [weak self] in
+            // Capture values before crossing thread boundary
+            let transcriptionText = result?.bestTranscription.formattedString
+            let isFinal = result?.isFinal ?? false
+            let confidence = result?.bestTranscription.segments.first?.confidence
+            let errorDescription = error?.localizedDescription
+
+            DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
 
-                if let result = result {
-                    self.currentTranscription = result.bestTranscription.formattedString
+                if let text = transcriptionText {
+                    self.currentTranscription = text
 
-                    if result.isFinal {
+                    if isFinal {
                         let transcription = Transcription(
-                            text: result.bestTranscription.formattedString,
+                            text: text,
                             isFinal: true,
-                            confidence: Double(result.bestTranscription.segments.first?.confidence ?? 0),
+                            confidence: Double(confidence ?? 0),
                             timestamp: Date()
                         )
                         self.transcriptionHistory.insert(transcription, at: 0)
@@ -173,8 +182,8 @@ public final class VoiceInputService: NSObject, ObservableObject {
                     }
                 }
 
-                if let error = error {
-                    self.state = .error(error.localizedDescription)
+                if let errorDesc = errorDescription {
+                    self.state = .error(errorDesc)
                     self.stopListening()
                 }
             }
