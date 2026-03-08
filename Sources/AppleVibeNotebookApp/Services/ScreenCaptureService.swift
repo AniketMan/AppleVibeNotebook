@@ -1,13 +1,12 @@
 import Foundation
-import ScreenCaptureKit
 import CoreGraphics
 import AVFoundation
 
-#if canImport(AppKit)
+#if os(macOS)
+import ScreenCaptureKit
 import AppKit
-#endif
 
-// MARK: - Screen Capture Service
+// MARK: - Screen Capture Service (macOS)
 
 /// Service for capturing screen content for AI vision analysis.
 /// Uses ScreenCaptureKit to capture windows, screens, or regions.
@@ -77,14 +76,12 @@ public final class ScreenCaptureService: NSObject {
         state = .requesting
 
         do {
-            // Get available content (this triggers permission dialog if needed)
             let content = try await SCShareableContent.excludingDesktopWindows(
                 false,
                 onScreenWindowsOnly: true
             )
 
             availableWindows = content.windows.filter { window in
-                // Filter out small windows and system UI
                 window.frame.width > 100 && window.frame.height > 100
             }.sorted { ($0.owningApplication?.applicationName ?? "") < ($1.owningApplication?.applicationName ?? "") }
 
@@ -177,8 +174,6 @@ public final class ScreenCaptureService: NSObject {
 
     /// Capture a region (interactive selection)
     private func captureRegion() async throws -> Data {
-        // For region capture, we'll capture the full screen and let the user crop later
-        // A more advanced implementation would use a transparent overlay for selection
         return try await captureFullScreen()
     }
 
@@ -191,13 +186,11 @@ public final class ScreenCaptureService: NSObject {
         config.showsCursor = false
         config.scalesToFit = true
 
-        // Use single frame capture
         let image = try await SCScreenshotManager.captureImage(
             contentFilter: filter,
             configuration: config
         )
 
-        // Convert CGImage to PNG data
         guard let pngData = image.pngData() else {
             throw CaptureError.imageConversionFailed
         }
@@ -211,7 +204,6 @@ public final class ScreenCaptureService: NSObject {
             let _ = await requestAccess()
         }
 
-        // Auto-select first non-system window if none selected
         if selectedWindow == nil && captureMode == .window {
             selectedWindow = availableWindows.first { window in
                 let appName = window.owningApplication?.applicationName ?? ""
@@ -260,11 +252,107 @@ public final class ScreenCaptureService: NSObject {
 
 extension CGImage {
     func pngData() -> Data? {
-        #if canImport(AppKit)
         let bitmap = NSBitmapImageRep(cgImage: self)
         return bitmap.representation(using: .png, properties: [:])
-        #else
-        return nil
-        #endif
     }
 }
+
+#else
+
+// MARK: - Screen Capture Service (iOS Stub)
+
+/// Stub implementation for iOS - screen capture requires user interaction on iOS
+@Observable
+@MainActor
+public final class ScreenCaptureService: NSObject {
+
+    public enum CaptureMode: String, CaseIterable, Identifiable, Sendable {
+        case fullScreen = "Full Screen"
+        case window = "Window"
+        case region = "Region"
+
+        public var id: String { rawValue }
+
+        public var iconName: String {
+            switch self {
+            case .fullScreen: return "rectangle.dashed"
+            case .window: return "rectangle.on.rectangle"
+            case .region: return "crop"
+            }
+        }
+    }
+
+    public enum CaptureState: Sendable {
+        case idle
+        case requesting
+        case ready
+        case capturing
+        case captured(Data)
+        case error(String)
+    }
+
+    public struct CapturedScreen: Identifiable, Sendable {
+        public let id = UUID()
+        public let imageData: Data
+        public let timestamp: Date
+        public let mode: CaptureMode
+        public let windowTitle: String?
+    }
+
+    public private(set) var state: CaptureState = .idle
+    public private(set) var captureHistory: [CapturedScreen] = []
+    public var captureMode: CaptureMode = .fullScreen
+
+    public override init() {
+        super.init()
+    }
+
+    public func requestAccess() async -> Bool {
+        state = .error("Screen capture is not available on iOS")
+        return false
+    }
+
+    public func refreshAvailableContent() async {
+        // Not available on iOS
+    }
+
+    public func capture() async throws -> Data {
+        throw CaptureError.notAvailableOnIOS
+    }
+
+    public func quickCapture() async throws -> Data {
+        throw CaptureError.notAvailableOnIOS
+    }
+
+    public func clearHistory() {
+        captureHistory.removeAll()
+    }
+
+    public enum CaptureError: Error, LocalizedError {
+        case notAvailableOnIOS
+        case noDisplayAvailable
+        case noWindowSelected
+        case capturePermissionDenied
+        case imageConversionFailed
+        case captureFailed(String)
+
+        public var errorDescription: String? {
+            switch self {
+            case .notAvailableOnIOS:
+                return "Screen capture is not available on iOS. Use screenshot sharing instead."
+            case .noDisplayAvailable:
+                return "No display available for capture"
+            case .noWindowSelected:
+                return "No window selected for capture"
+            case .capturePermissionDenied:
+                return "Screen capture permission denied"
+            case .imageConversionFailed:
+                return "Failed to convert captured image"
+            case .captureFailed(let msg):
+                return "Capture failed: \(msg)"
+            }
+        }
+    }
+}
+
+#endif

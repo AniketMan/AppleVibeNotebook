@@ -108,6 +108,16 @@ struct FigmaAssetBrowserView: View {
 
     // MARK: - Document Browser
 
+    private var thumbnailPlaceholder: some View {
+        RoundedRectangle(cornerRadius: 8)
+            .fill(Color.white.opacity(0.1))
+            .frame(width: 48, height: 48)
+            .overlay {
+                Image(systemName: "doc.richtext")
+                    .foregroundStyle(.white.opacity(0.5))
+            }
+    }
+
     private func documentBrowserContent(_ document: FigmaFileParser.FigmaDocument) -> some View {
         VStack(spacing: 0) {
             // Header
@@ -133,6 +143,7 @@ struct FigmaAssetBrowserView: View {
     private func headerView(_ document: FigmaFileParser.FigmaDocument) -> some View {
         HStack(spacing: 16) {
             // Thumbnail
+            #if os(macOS)
             if let thumbnailData = document.thumbnail,
                let nsImage = NSImage(data: thumbnailData) {
                 Image(nsImage: nsImage)
@@ -141,14 +152,20 @@ struct FigmaAssetBrowserView: View {
                     .frame(width: 48, height: 48)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
             } else {
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.white.opacity(0.1))
-                    .frame(width: 48, height: 48)
-                    .overlay {
-                        Image(systemName: "doc.richtext")
-                            .foregroundStyle(.white.opacity(0.5))
-                    }
+            thumbnailPlaceholder
             }
+            #else
+            if let thumbnailData = document.thumbnail,
+               let uiImage = UIImage(data: thumbnailData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 48, height: 48)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+            } else {
+                thumbnailPlaceholder
+            }
+            #endif
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(document.fileName)

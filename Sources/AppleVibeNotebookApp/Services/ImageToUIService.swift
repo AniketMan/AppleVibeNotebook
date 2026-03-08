@@ -150,7 +150,7 @@ public final class ImageToUIService {
             response = try await generateWithOpenAI(imageData: imageData, format: outputFormat)
         case .anthropic:
             response = try await generateWithAnthropic(imageData: imageData, format: outputFormat)
-        case .google:
+        case .google, .geminiNotebook:
             response = try await generateWithGoogle(imageData: imageData, format: outputFormat)
         case .xai:
             response = try await generateWithXAI(imageData: imageData, format: outputFormat)

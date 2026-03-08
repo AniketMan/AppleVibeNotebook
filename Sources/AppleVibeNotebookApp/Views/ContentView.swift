@@ -4,19 +4,21 @@ import AppleVibeNotebook
 
 struct ContentView: View {
     @Environment(AppState.self) private var appState
+    @State private var canvasState = CanvasState()
+    @State private var cloudSync = CloudSyncService()
 
     var body: some View {
         @Bindable var state = appState
 
         Group {
             #if os(iOS)
-            // iPad: Use tab-based navigation
-            iPadContentView()
+            iPadMainInterface()
             #else
-            // macOS: Use NavigationSplitView
             macOSContentView()
             #endif
         }
+        .environment(canvasState)
+        .environment(cloudSync)
         .fileImporter(
             isPresented: $state.showImportPanel,
             allowedContentTypes: [.folder],
@@ -81,53 +83,22 @@ struct ContentView: View {
         .navigationTitle(appState.activeNotebook?.name ?? "Apple Vibe Notebook")
     }
 
-    // MARK: - iPad Layout
+    // MARK: - iPad Main Interface (Per TECHNICAL_SPEC.md)
 
     @ViewBuilder
-    private func iPadContentView() -> some View {
-        TabView {
-            // Notebook Tab
-            NavigationStack {
-                if appState.activeNotebook != nil {
-                    NotebookEditorView()
-                } else {
-                    WelcomeView()
-                }
-            }
-            .tabItem {
-                Label("Notebook", systemImage: "book.pages")
-            }
+    private func iPadMainInterface() -> some View {
+        ZStack {
+            // Main Canvas Workspace
+            CanvasWorkspaceView()
 
-            // AI Assistant Tab
-            NavigationStack {
-                AISuggestionPanelView()
-            }
-            .tabItem {
-                Label("AI Assist", systemImage: "sparkles")
-            }
-
-            // Convert Tab
-            NavigationStack {
-                ConvertToolView()
-            }
-            .tabItem {
-                Label("Convert", systemImage: "arrow.triangle.2.circlepath")
-            }
-
-            // Settings Tab
-            NavigationStack {
-                SettingsView()
-                    .environment(appState)
-            }
-            .tabItem {
-                Label("Settings", systemImage: "gear")
-            }
+            // Liquid Glass Voice Companion (floating orb - per spec section 4.1)
+            LiquidGlassCompanion()
         }
     }
 
-    // MARK: - Import Handlers
+  // MARK: - Import Handlers
 
-    private func handleFolderImport(_ result: Result<[URL], Error>) {
+  private func handleFolderImport(_ result: Result<[URL], Error>) {
         switch result {
         case .success(let urls):
             guard let url = urls.first else { return }
@@ -386,48 +357,74 @@ struct NotebookEditorView: View {
     }
 }
 
+// MARK: - Conversion Mode
+
+enum ConversionMode {
+    case reactToSwift
+    case swiftToReact
+}
+
 // MARK: - Convert Tool View (iPad)
 
 struct ConvertToolView: View {
     @Environment(AppState.self) private var appState
+    var mode: ConversionMode?
 
     var body: some View {
         VStack(spacing: 24) {
             Text("Code Converter")
                 .font(.largeTitle.bold())
 
-            HStack(spacing: 20) {
-                Button {
-                    appState.showImportPanel = true
-                } label: {
-                    VStack(spacing: 12) {
-                        Image(systemName: "arrow.right")
-                            .font(.system(size: 40))
-                        Text("React → SwiftUI")
-                            .font(.headline)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 40)
+            if let mode = mode {
+                // Single mode view
+                switch mode {
+                case .reactToSwift:
+                    conversionButton(
+                        icon: "arrow.right",
+                        title: "React → SwiftUI",
+                        action: { appState.showImportPanel = true }
+                    )
+                case .swiftToReact:
+                    conversionButton(
+                        icon: "arrow.left",
+                        title: "SwiftUI → React",
+                        action: { appState.showSwiftUIImportPanel = true }
+                    )
                 }
-                .buttonStyle(.bordered)
+            } else {
+                // Both options
+                HStack(spacing: 20) {
+                    conversionButton(
+                        icon: "arrow.right",
+                        title: "React → SwiftUI",
+                        action: { appState.showImportPanel = true }
+                    )
 
-                Button {
-                    appState.showSwiftUIImportPanel = true
-                } label: {
-                    VStack(spacing: 12) {
-                        Image(systemName: "arrow.left")
-                            .font(.system(size: 40))
-                        Text("SwiftUI → React")
-                            .font(.headline)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 40)
+                    conversionButton(
+                        icon: "arrow.left",
+                        title: "SwiftUI → React",
+                        action: { appState.showSwiftUIImportPanel = true }
+                    )
                 }
-                .buttonStyle(.bordered)
+                .padding()
             }
-            .padding()
         }
         .navigationTitle("Convert")
+    }
+
+    @ViewBuilder
+    private func conversionButton(icon: String, title: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            VStack(spacing: 12) {
+                Image(systemName: icon)
+                    .font(.system(size: 40))
+                Text(title)
+                    .font(.headline)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 40)
+        }
+        .buttonStyle(.bordered)
     }
 }
 
@@ -458,5 +455,32 @@ struct CodeExportDocument: FileDocument {
         }
 
         return folderWrapper
+    }
+}
+
+// MARK: - Feature Card (iPad Welcome)
+
+struct FeatureCard: View {
+    let icon: String
+    let title: String
+    let description: String
+
+    var body: some View {
+        VStack(spacing: 12) {
+            Image(systemName: icon)
+                .font(.system(size: 32, weight: .light))
+                .foregroundStyle(.tint)
+
+            Text(title)
+                .font(.headline)
+
+            Text(description)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .frame(width: 140, height: 120)
+        .padding()
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
     }
 }

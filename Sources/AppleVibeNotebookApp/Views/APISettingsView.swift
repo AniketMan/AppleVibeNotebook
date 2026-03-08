@@ -315,6 +315,7 @@ struct APISettingsView: View {
         case .xai: return .white
         case .google: return .blue
         case .github: return .purple
+        case .geminiNotebook: return .blue
         }
     }
 
@@ -326,6 +327,7 @@ struct APISettingsView: View {
         case .xai: return "Grok-2, Grok-2 Mini"
         case .google: return "Gemini 2.0 Flash, Pro"
         case .github: return "GitHub Copilot integration"
+        case .geminiNotebook: return "Gemini Notebook MCP Server"
         }
     }
 
@@ -408,7 +410,7 @@ struct APISettingsView: View {
             return try await testGoogle(apiKey: apiKey)
         case .github:
             return try await testGitHub(apiKey: apiKey)
-        case .apple:
+        case .apple, .geminiNotebook:
             return true
         }
     }

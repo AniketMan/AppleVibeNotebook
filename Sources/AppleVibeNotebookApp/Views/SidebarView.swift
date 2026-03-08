@@ -87,7 +87,7 @@ struct FileRow: View {
 
     private var iconName: String {
         switch file.type {
-        case .jsx, .tsx: return "swift"
+        case .jsx, .tsx, .swift: return "swift"
         case .css, .scss: return "paintpalette"
         case .json: return "doc.text"
         case .other: return "doc"
@@ -98,6 +98,7 @@ struct FileRow: View {
         switch file.type {
         case .jsx: return .orange
         case .tsx: return .blue
+        case .swift: return .orange
         case .css, .scss: return .pink
         case .json: return .gray
         case .other: return .secondary

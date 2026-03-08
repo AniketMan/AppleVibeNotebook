@@ -65,31 +65,33 @@ public final class VoiceInputService: NSObject, ObservableObject {
     // MARK: - Authorization
 
     /// Request permission for speech recognition
-    public func requestAuthorization() async -> Bool {
-        state = .requesting
-
-        let status = await withCheckedContinuation { continuation in
+    public nonisolated func requestAuthorization() async -> Bool {
+        let status = await withCheckedContinuation { (continuation: CheckedContinuation<SFSpeechRecognizerAuthorizationStatus, Never>) in
             SFSpeechRecognizer.requestAuthorization { status in
                 continuation.resume(returning: status)
             }
         }
 
-        switch status {
-        case .authorized:
-            state = .ready
-            return true
-        case .denied:
-            state = .error("Speech recognition denied. Enable in System Settings > Privacy.")
-            return false
-        case .restricted:
-            state = .error("Speech recognition restricted on this device.")
-            return false
-        case .notDetermined:
-            state = .error("Speech recognition not determined.")
-            return false
-        @unknown default:
-            state = .error("Unknown authorization status.")
-            return false
+        return await MainActor.run {
+            self.state = .requesting
+
+            switch status {
+            case .authorized:
+                self.state = .ready
+                return true
+            case .denied:
+                self.state = .error("Speech recognition denied. Enable in System Settings > Privacy.")
+                return false
+            case .restricted:
+                self.state = .error("Speech recognition restricted on this device.")
+                return false
+            case .notDetermined:
+                self.state = .error("Speech recognition not determined.")
+                return false
+            @unknown default:
+                self.state = .error("Unknown authorization status.")
+                return false
+            }
         }
     }
 

@@ -67,6 +67,17 @@ struct AppleVibeNotebookApp: App {
     }
 }
 
+// MARK: - App Section (for iPadOS Navigation)
+
+enum AppSection: Hashable {
+    case home
+    case aiAssistant
+    case reactToSwift
+    case swiftToReact
+    case notebook(UUID)
+    case settings
+}
+
 // MARK: - App State
 
 @Observable
@@ -109,6 +120,15 @@ final class AppState {
     var errorMessage: String?
     var showError: Bool = false
 
+    // iPadOS Navigation State (HIG: NavigationSplitView)
+    var sidebarVisibility: NavigationSplitViewVisibility = .automatic
+    var selectedSection: AppSection? = .home
+
+    // Recent notebooks (for sidebar)
+    var recentNotebooks: [Notebook] {
+        notebooks.sorted { $0.modifiedAt > $1.modifiedAt }.prefix(5).map { $0 }
+    }
+
     // Notebook Methods
     func createNewNotebook() {
         let notebook = Notebook(
@@ -120,6 +140,7 @@ final class AppState {
         notebooks.append(notebook)
         activeNotebook = notebook
         activeCell = notebook.cells.first
+        selectedSection = .notebook(notebook.id)
     }
 }
 

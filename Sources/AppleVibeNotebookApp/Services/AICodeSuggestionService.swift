@@ -173,7 +173,7 @@ public final class AICodeSuggestionService {
             generatedText = try await generateWithAnthropic(code: code, type: type, context: context)
         case .xai:
             generatedText = try await generateWithXAI(code: code, type: type, context: context)
-        case .google:
+        case .google, .geminiNotebook:
             generatedText = try await generateWithGoogle(code: code, type: type, context: context)
         case .github:
             generatedText = try await generateWithGitHub(code: code, type: type, context: context)

@@ -44,28 +44,22 @@ struct AISuggestionPanelView: View {
 
     var body: some View {
         NavigationStack {
-            HSplitView {
-                inputPanel
-                    .frame(minWidth: 320, idealWidth: 400)
+            mainContent
+                .navigationTitle("AI Assistant")
+                .toolbar {
+                    ToolbarItemGroup(placement: .primaryAction) {
+                        providerMenu
+                        settingsButton
+                    }
 
-                suggestionsPanel
-                    .frame(minWidth: 320)
-            }
-            .navigationTitle("AI Assistant")
-            .toolbar {
-                ToolbarItemGroup(placement: .primaryAction) {
-                    providerMenu
-                    settingsButton
-                }
-
-                ToolbarItem(placement: .navigation) {
-                    if appState.projectURL == nil {
-                        Button("Back", systemImage: "chevron.left") {
-                            appState.showAIPanel = false
+                    ToolbarItem(placement: .navigation) {
+                        if appState.projectURL == nil {
+                            Button("Back", systemImage: "chevron.left") {
+                                appState.showAIPanel = false
+                            }
                         }
                     }
                 }
-            }
         }
         .task {
             await aiService.checkAvailability()
@@ -85,6 +79,29 @@ struct AISuggestionPanelView: View {
         .sheet(isPresented: $showScreenCapture) {
             screenCaptureSheet
         }
+    }
+
+    // MARK: - Main Content
+
+    @ViewBuilder
+    private var mainContent: some View {
+        #if os(macOS)
+        HSplitView {
+            inputPanel
+                .frame(minWidth: 320, idealWidth: 400)
+
+            suggestionsPanel
+                .frame(minWidth: 320)
+        }
+        #else
+        HStack(spacing: 0) {
+            inputPanel
+                .frame(minWidth: 320, idealWidth: 400)
+
+            suggestionsPanel
+                .frame(minWidth: 320)
+        }
+        #endif
     }
 
     // MARK: - Provider Menu (HIG: Use native menus)
@@ -549,6 +566,7 @@ struct AISuggestionPanelView: View {
     // MARK: - Screen Capture Sheet
 
     private var screenCaptureSheet: some View {
+        #if os(macOS)
         NavigationStack {
             List(screenService.availableWindows, id: \.windowID) { window in
                 Button {
@@ -593,6 +611,22 @@ struct AISuggestionPanelView: View {
         .task {
             let _ = await screenService.requestAccess()
         }
+        #else
+        NavigationStack {
+            ContentUnavailableView(
+                "Screen Capture",
+                systemImage: "rectangle.dashed",
+                description: Text("Screen capture is not available on iOS. Please import an image instead.")
+            )
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        showScreenCapture = false
+                    }
+                }
+            }
+        }
+        #endif
     }
 
     // MARK: - Helpers

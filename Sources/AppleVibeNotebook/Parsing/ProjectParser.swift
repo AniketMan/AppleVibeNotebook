@@ -396,6 +396,7 @@ public final class ProjectParser: @unchecked Sendable {
     // MARK: - ZIP Extraction
 
     private func extractZip(at source: URL, to destination: URL) async throws {
+        #if os(macOS)
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
         process.arguments = ["-q", source.path, "-d", destination.path]
@@ -411,6 +412,11 @@ public final class ProjectParser: @unchecked Sendable {
             let errorMessage = String(data: errorData, encoding: .utf8) ?? "Unknown error"
             throw ParserError.zipExtractionFailed(errorMessage)
         }
+        #else
+        // ZIP extraction using Process is not available on iOS
+        // On iOS, use FileManager or a third-party library for ZIP extraction
+        throw ParserError.zipExtractionFailed("ZIP extraction not available on iOS")
+        #endif
     }
 }
 

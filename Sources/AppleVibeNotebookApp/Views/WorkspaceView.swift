@@ -4,61 +4,80 @@ struct WorkspaceView: View {
     @Environment(AppState.self) private var appState
 
     var body: some View {
+        #if os(macOS)
         HSplitView {
-            if appState.showCodePanel {
-                CodePanelView()
-                    .frame(minWidth: 300)
-            }
-
-            if appState.showPreviewPanel {
-                PreviewPanelView()
-                    .frame(minWidth: 300)
-            }
-
-            if appState.showReportPanel {
-                ReportPanelView()
-                    .frame(minWidth: 250)
-            }
-
-            if appState.showAIPanel {
-                AISuggestionPanelView()
-                    .frame(minWidth: 400, idealWidth: 500)
-            }
+            workspacePanels
         }
         .toolbar {
-            ToolbarItemGroup {
-                Toggle(isOn: Bindable(appState).showCodePanel) {
-                    Image(systemName: "doc.text")
-                }
-                .help("Toggle Code Panel")
+            workspaceToolbar
+        }
+        #else
+        HStack(spacing: 0) {
+            workspacePanels
+        }
+        .toolbar {
+            workspaceToolbar
+        }
+        #endif
+    }
 
-                Toggle(isOn: Bindable(appState).showPreviewPanel) {
-                    Image(systemName: "eye")
-                }
-                .help("Toggle Preview Panel")
+    @ViewBuilder
+    private var workspacePanels: some View {
+        if appState.showCodePanel {
+            CodePanelView()
+                .frame(minWidth: 300)
+        }
 
-                Toggle(isOn: Bindable(appState).showReportPanel) {
-                    Image(systemName: "chart.bar.doc.horizontal")
-                }
-                .help("Toggle Report Panel")
+        if appState.showPreviewPanel {
+            PreviewPanelView()
+                .frame(minWidth: 300)
+        }
 
-                Divider()
+        if appState.showReportPanel {
+            ReportPanelView()
+                .frame(minWidth: 250)
+        }
 
-                Toggle(isOn: Bindable(appState).showAIPanel) {
-                    Image(systemName: "sparkles")
-                }
-                .help("Toggle AI Assistant (⌘4)")
+        if appState.showAIPanel {
+            AISuggestionPanelView()
+                .frame(minWidth: 400, idealWidth: 500)
+        }
+    }
+
+    @ToolbarContentBuilder
+    private var workspaceToolbar: some ToolbarContent {
+        ToolbarItemGroup {
+            Toggle(isOn: Bindable(appState).showCodePanel) {
+                Image(systemName: "doc.text")
             }
+            .help("Toggle Code Panel")
 
-            ToolbarItem {
-                Button {
-                    appState.showExportPanel = true
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                }
-                .disabled(appState.generatedCode.isEmpty)
-                .help("Export SwiftUI Code")
+            Toggle(isOn: Bindable(appState).showPreviewPanel) {
+                Image(systemName: "eye")
             }
+            .help("Toggle Preview Panel")
+
+            Toggle(isOn: Bindable(appState).showReportPanel) {
+                Image(systemName: "chart.bar.doc.horizontal")
+            }
+            .help("Toggle Report Panel")
+
+            Divider()
+
+            Toggle(isOn: Bindable(appState).showAIPanel) {
+                Image(systemName: "sparkles")
+            }
+            .help("Toggle AI Assistant (⌘4)")
+        }
+
+        ToolbarItem {
+            Button {
+                appState.showExportPanel = true
+            } label: {
+                Image(systemName: "square.and.arrow.up")
+            }
+            .disabled(appState.generatedCode.isEmpty)
+            .help("Export SwiftUI Code")
         }
     }
 }

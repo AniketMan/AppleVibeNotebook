@@ -204,6 +204,7 @@ public final class FigmaFileParser {
 
         try FileManager.default.createDirectory(at: tempDir, withIntermediateDirectories: true)
 
+        #if os(macOS)
         // Use Process to unzip (more reliable than manual implementation)
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
@@ -217,6 +218,11 @@ public final class FigmaFileParser {
         guard process.terminationStatus == 0 else {
             throw FigmaParseError.invalidFile
         }
+        #else
+        // On iOS, use a simpler zip extraction approach
+        // Note: Full .fig parsing requires macOS due to Process dependencies
+        throw FigmaParseError.invalidFile
+        #endif
 
         return tempDir
     }
@@ -355,6 +361,7 @@ public final class FigmaFileParser {
 
         try Data(input).write(to: inputFile)
 
+        #if os(macOS)
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
         process.arguments = ["zstd", "-d", inputFile.path, "-o", outputFile.path, "-f"]
@@ -368,6 +375,7 @@ public final class FigmaFileParser {
            let outputData = try? Data(contentsOf: outputFile) {
             return [UInt8](outputData)
         }
+        #endif
 
         throw FigmaParseError.decompressionFailed
     }
