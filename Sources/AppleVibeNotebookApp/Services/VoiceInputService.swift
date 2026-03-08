@@ -140,36 +140,39 @@ public final class VoiceInputService: NSObject, ObservableObject {
 
         // Capture local references to avoid capturing self in closures
         let request = recognitionRequest
-        weak var weakSelf = self
 
-        // Install audio tap - callback runs on audio thread
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
-            // Append buffer (safe - request is a local capture)
+        // Install audio tap - callback runs on audio thread (real-time priority)
+        // IMPORTANT: This closure runs on RealtimeMessenger.mServiceQueue, NOT the main thread.
+        // We must NOT access any @MainActor-isolated state directly in this callback.
+        // Use @Sendable to ensure Swift doesn't try to verify actor isolation.
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] @Sendable buffer, _ in
+            // Append buffer to recognition request (thread-safe operation)
             request.append(buffer)
 
-            // Calculate audio level on audio thread
+            // Calculate audio level on audio thread (no actor-isolated access)
             let channelData = buffer.floatChannelData?[0]
             let channelDataValueArray = stride(from: 0, to: Int(buffer.frameLength), by: buffer.stride).map { channelData?[$0] ?? 0 }
             let rms = sqrt(channelDataValueArray.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
             let level = rms * 10
 
-            // Update UI on main thread
-            DispatchQueue.main.async {
-                weakSelf?.audioLevel = level
+            // Dispatch to main thread for UI updates using Task to avoid actor isolation issues
+            Task { @MainActor in
+                self?.audioLevel = level
             }
         }
 
         // Start recognition task - callback runs on background queue
-        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
-            // Extract data on background thread
+        // Use @Sendable to prevent actor isolation checks in the callback
+        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { [weak self] @Sendable result, error in
+            // Extract data on background thread (no actor-isolated access)
             let transcriptionText = result?.bestTranscription.formattedString
             let isFinal = result?.isFinal ?? false
             let confidence = result?.bestTranscription.segments.first?.confidence
             let errorDescription = error?.localizedDescription
 
-            // Update UI on main thread
-            DispatchQueue.main.async {
-                guard let self = weakSelf else { return }
+            // Dispatch to main actor for UI updates
+            Task { @MainActor in
+                guard let self else { return }
 
                 if let text = transcriptionText {
                     self.currentTranscription = text
