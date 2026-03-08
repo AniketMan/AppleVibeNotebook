@@ -1,0 +1,23 @@
+{
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/ConversionReport/ConversionReport.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/ConversionReport.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/ConversionReport.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/ConversionReport.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/ConversionReport.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/ConversionReport.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Parsing/FigmaFileParser.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/FigmaFileParser.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/FigmaFileParser.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/FigmaFileParser.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/FigmaFileParser.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/FigmaFileParser.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Parsing/ImageAssetImporter.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/ImageAssetImporter.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/ImageAssetImporter.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/ImageAssetImporter.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/ImageAssetImporter.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/ImageAssetImporter.swiftdeps"
+  }
+}

@@ -12,9 +12,8 @@ import AppKit
 /// Service for capturing voice input and converting to text for AI assistance.
 /// Uses Apple's Speech framework for on-device speech recognition.
 ///
-/// Note: This class is @MainActor isolated to avoid Swift Concurrency data race issues
-/// with SFSpeechRecognizer callbacks.
-@MainActor
+/// Note: This class uses manual thread safety with DispatchQueue.main.async
+/// instead of @MainActor to avoid actor isolation crashes in audio callbacks.
 public final class VoiceInputService: NSObject, ObservableObject {
 
     // MARK: - Types
@@ -37,6 +36,7 @@ public final class VoiceInputService: NSObject, ObservableObject {
     }
 
     // MARK: - Published Properties
+    // Note: @Published requires updates from main thread for UI binding
 
     @Published public private(set) var state: VoiceState = .idle
     @Published public private(set) var currentTranscription: String = ""
@@ -65,39 +65,40 @@ public final class VoiceInputService: NSObject, ObservableObject {
     // MARK: - Authorization
 
     /// Request permission for speech recognition
-    public nonisolated func requestAuthorization() async -> Bool {
+    @MainActor
+    public func requestAuthorization() async -> Bool {
         let status = await withCheckedContinuation { (continuation: CheckedContinuation<SFSpeechRecognizerAuthorizationStatus, Never>) in
             SFSpeechRecognizer.requestAuthorization { status in
                 continuation.resume(returning: status)
             }
         }
 
-        return await MainActor.run {
-            self.state = .requesting
+        self.state = .requesting
 
-            switch status {
-            case .authorized:
-                self.state = .ready
-                return true
-            case .denied:
-                self.state = .error("Speech recognition denied. Enable in System Settings > Privacy.")
-                return false
-            case .restricted:
-                self.state = .error("Speech recognition restricted on this device.")
-                return false
-            case .notDetermined:
-                self.state = .error("Speech recognition not determined.")
-                return false
-            @unknown default:
-                self.state = .error("Unknown authorization status.")
-                return false
-            }
+        switch status {
+        case .authorized:
+            self.state = .ready
+            return true
+        case .denied:
+            self.state = .error("Speech recognition denied. Enable in System Settings > Privacy.")
+            return false
+        case .restricted:
+            self.state = .error("Speech recognition restricted on this device.")
+            return false
+        case .notDetermined:
+            self.state = .error("Speech recognition not determined.")
+            return false
+        @unknown default:
+            self.state = .error("Unknown authorization status.")
+            return false
         }
     }
 
     // MARK: - Recording
 
     /// Start listening for voice input
+    /// Must be called from main thread
+    @MainActor
     public func startListening() throws {
         guard let speechRecognizer = speechRecognizer, speechRecognizer.isAvailable else {
             throw VoiceError.recognizerUnavailable
@@ -122,7 +123,7 @@ public final class VoiceInputService: NSObject, ObservableObject {
         }
 
         recognitionRequest.shouldReportPartialResults = true
-        recognitionRequest.requiresOnDeviceRecognition = true // On-device for privacy
+        recognitionRequest.requiresOnDeviceRecognition = true
 
         // Configure audio input
         let inputNode = audioEngine.inputNode
@@ -137,35 +138,38 @@ public final class VoiceInputService: NSObject, ObservableObject {
             throw VoiceError.invalidAudioFormat
         }
 
-        // Install audio tap - this callback runs on audio thread
-        // Use DispatchQueue.main.async to avoid actor isolation issues with @MainActor class
-        inputNode.installTap(onBus: 0, bufferSize: 0, format: recordingFormat) { [weak self] buffer, _ in
-            guard let self = self else { return }
-            self.recognitionRequest?.append(buffer)
+        // Capture local references to avoid capturing self in closures
+        let request = recognitionRequest
+        weak var weakSelf = self
 
-            // Calculate audio level from buffer
+        // Install audio tap - callback runs on audio thread
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
+            // Append buffer (safe - request is a local capture)
+            request.append(buffer)
+
+            // Calculate audio level on audio thread
             let channelData = buffer.floatChannelData?[0]
             let channelDataValueArray = stride(from: 0, to: Int(buffer.frameLength), by: buffer.stride).map { channelData?[$0] ?? 0 }
             let rms = sqrt(channelDataValueArray.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
             let level = rms * 10
 
-            // Update audio level on main thread using GCD (avoids actor isolation crash)
-            DispatchQueue.main.async { [weak self] in
-                self?.audioLevel = level
+            // Update UI on main thread
+            DispatchQueue.main.async {
+                weakSelf?.audioLevel = level
             }
         }
 
         // Start recognition task - callback runs on background queue
-        // Use DispatchQueue.main.async to avoid actor isolation issues
-        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { [weak self] result, error in
-            // Capture values before crossing thread boundary
+        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
+            // Extract data on background thread
             let transcriptionText = result?.bestTranscription.formattedString
             let isFinal = result?.isFinal ?? false
             let confidence = result?.bestTranscription.segments.first?.confidence
             let errorDescription = error?.localizedDescription
 
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+            // Update UI on main thread
+            DispatchQueue.main.async {
+                guard let self = weakSelf else { return }
 
                 if let text = transcriptionText {
                     self.currentTranscription = text
@@ -198,6 +202,7 @@ public final class VoiceInputService: NSObject, ObservableObject {
     }
 
     /// Stop listening
+    @MainActor
     public func stopListening() {
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
@@ -215,6 +220,7 @@ public final class VoiceInputService: NSObject, ObservableObject {
     }
 
     /// Toggle listening state
+    @MainActor
     public func toggleListening() throws {
         if isListening {
             stopListening()
@@ -224,6 +230,7 @@ public final class VoiceInputService: NSObject, ObservableObject {
     }
 
     /// Clear transcription history
+    @MainActor
     public func clearHistory() {
         transcriptionHistory.removeAll()
         currentTranscription = ""

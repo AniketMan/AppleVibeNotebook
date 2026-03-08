@@ -1,0 +1,23 @@
+{
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Models/CSSTypes.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/CSSTypes.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/CSSTypes.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/CSSTypes.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/CSSTypes.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/CSSTypes.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Parsing/BabelParserBundle.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/BabelParserBundle.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/BabelParserBundle.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/BabelParserBundle.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/BabelParserBundle.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/BabelParserBundle.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebook/Parsing/CSSParser.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/CSSParser.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/CSSParser.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/CSSParser.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/CSSParser.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/AppleVibeNotebook.build/Objects-normal/arm64/CSSParser.swiftdeps"
+  }
+}

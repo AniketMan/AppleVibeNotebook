@@ -1,0 +1,30 @@
+{
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebookApp/AppleVibeNotebookApp.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/AppleVibeNotebookApp.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/AppleVibeNotebookApp.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/AppleVibeNotebookApp.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/AppleVibeNotebookApp.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/AppleVibeNotebookApp.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebookApp/Canvas/CanvasState.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasState.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasState.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasState.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasState.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasState.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebookApp/Services/CanvasAIBridge.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasAIBridge.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasAIBridge.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasAIBridge.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasAIBridge.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasAIBridge.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/Sources/AppleVibeNotebookApp/Views/Canvas/CanvasLayerView.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasLayerView.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasLayerView.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasLayerView.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasLayerView.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/CanvasCode.build/Debug-iphonesimulator/CanvasCode.build/Objects-normal/arm64/CanvasLayerView.swiftdeps"
+  }
+}

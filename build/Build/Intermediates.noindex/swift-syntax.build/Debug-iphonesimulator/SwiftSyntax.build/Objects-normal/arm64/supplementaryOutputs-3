@@ -1,0 +1,51 @@
+{
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntax/SourceEdit.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceEdit.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceEdit.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceEdit.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceEdit.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceEdit.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntax/SourceLength.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceLength.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceLength.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceLength.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceLength.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceLength.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntax/SourceLocation.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceLocation.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceLocation.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceLocation.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceLocation.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourceLocation.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntax/SourcePresence.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourcePresence.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourcePresence.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourcePresence.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourcePresence.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SourcePresence.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntax/SwiftSyntaxCompatibility.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SwiftSyntaxCompatibility.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SwiftSyntaxCompatibility.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SwiftSyntaxCompatibility.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SwiftSyntaxCompatibility.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SwiftSyntaxCompatibility.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntax/Syntax.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/Syntax.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/Syntax.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/Syntax.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/Syntax.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/Syntax.swiftdeps"
+  },
+  "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/SourcePackages/checkouts/swift-syntax/Sources/SwiftSyntax/SyntaxArena.swift" : {
+    "const-values" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SyntaxArena.swiftconstvalues",
+    "dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SyntaxArena.d",
+    "diagnostics" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SyntaxArena.dia",
+    "object" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SyntaxArena.o",
+    "swift-dependencies" : "/Users/aniketbhatt/Desktop/AppleVibeNotebook/build/Build/Intermediates.noindex/swift-syntax.build/Debug-iphonesimulator/SwiftSyntax.build/Objects-normal/arm64/SyntaxArena.swiftdeps"
+  }
+}

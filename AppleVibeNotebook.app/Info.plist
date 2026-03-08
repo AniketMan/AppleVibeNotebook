@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleDisplayName</key>
+    <string>Apple Vibe Notebook</string>
+    <key>CFBundleExecutable</key>
+    <string>AppleVibeNotebookApp</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.applevibenotebook.app</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>AppleVibeNotebook</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>26.0</string>
+    <key>UILaunchScreen</key>
+    <dict/>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UIRequiresFullScreen</key>
+    <false/>
+    <key>UIStatusBarStyle</key>
+    <string>UIStatusBarStyleDefault</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Apple Vibe Notebook uses the microphone for voice commands to create UI elements.</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>Apple Vibe Notebook uses speech recognition for voice-to-UI features.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Apple Vibe Notebook uses the camera to capture designs for AI conversion.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Apple Vibe Notebook accesses photos to import design images.</string>
+</dict>
+</plist>

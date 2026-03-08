@@ -1,0 +1,107 @@
+name: CanvasCode
+options:
+  bundleIdPrefix: com.canvascode
+  deploymentTarget:
+    iOS: "26.0"
+    macOS: "26.0"
+  xcodeVersion: "16.0"
+  generateEmptyDirectories: true
+  groupSortPosition: top
+  defaultConfig: Debug
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    ENABLE_USER_SCRIPT_SANDBOXING: false
+    SWIFT_STRICT_CONCURRENCY: complete
+
+targets:
+  AppleVibeNotebook:
+    type: framework
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Sources/AppleVibeNotebook
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.canvascode.core
+        PRODUCT_NAME: AppleVibeNotebook
+        DEFINES_MODULE: true
+        GENERATE_INFOPLIST_FILE: true
+    dependencies:
+      - package: SwiftSyntax
+        product: SwiftSyntax
+      - package: SwiftSyntax
+        product: SwiftParser
+      - package: SwiftSyntax
+        product: SwiftSyntaxBuilder
+
+  CanvasCode:
+    type: application
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: Sources/AppleVibeNotebookApp
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.canvascode.app
+        INFOPLIST_FILE: Info.plist
+        PRODUCT_NAME: CanvasCode
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"
+        TARGETED_DEVICE_FAMILY: "2"  # iPad only (1=iPhone, 2=iPad, 1,2=Universal)
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: true
+        SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: false
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ENABLE_PREVIEWS: true
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_IDENTITY: "Apple Development"
+        GENERATE_INFOPLIST_FILE: false
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
+        INFOPLIST_KEY_UILaunchScreen_Generation: true
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown"
+        INFOPLIST_KEY_UISupportsDocumentBrowser: true
+        UIRequiresFullScreen: false
+        UISupportsDocumentBrowser: true
+    dependencies:
+      - target: AppleVibeNotebook
+
+  CanvasCodeTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests/AppleVibeNotebookTests
+    dependencies:
+      - target: CanvasCode
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.canvascode.tests
+
+packages:
+  SwiftSyntax:
+    url: https://github.com/apple/swift-syntax.git
+    from: "600.0.0"
+
+schemes:
+  CanvasCode:
+    build:
+      targets:
+        CanvasCode: all
+        AppleVibeNotebook: all
+    run:
+      config: Debug
+      simulateLocation:
+        allow: true
+    test:
+      config: Debug
+      gatherCoverageData: true
+      targets:
+        - CanvasCodeTests
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

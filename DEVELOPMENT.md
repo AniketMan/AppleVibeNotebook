@@ -3,7 +3,7 @@
 > **Project**: AppleVibeNotebook (formerly React2SwiftUI Canvas)
 > **Purpose**: Convert React/JSX projects to native SwiftUI code with AI assistance
 > **Platform**: macOS 26+ / iOS 26+
-> **Last Updated**: March 7, 2026 (10:43 UTC)
+> **Last Updated**: March 8, 2026 (07:48 UTC)
 
 ---
 
@@ -338,7 +338,8 @@ import PencilKit
 
 - [x] ~~Fix 860+ build errors~~ (Completed Session 3)
 - [x] ~~Update iPadCanvasView to new APIs~~ (Completed Session 3)
-- [ ] Test voice input on macOS after validation fixes
+- [x] ~~Fix Swift 6 actor isolation crash in VoiceInputService~~ (Completed Session 6)
+- [ ] Test voice input on iOS Simulator after actor isolation fix
 - [ ] Complete Image-to-UI panel view
 - [ ] Add drag-and-drop image upload
 - [ ] Integrate image-to-UI into main navigation
@@ -347,3 +348,34 @@ import PencilKit
 - [ ] Add animation mapping (React → SwiftUI)
 - [ ] visionOS spatial canvas support
 - [ ] Add unit tests for new API changes
+
+---
+
+## 🔐 Session 6 - Actor Isolation Fix (March 8, 2026)
+
+### Problem
+VoiceInputService crashed with `EXC_BREAKPOINT` when using voice input. The crash happened because:
+- The class was marked `@MainActor`
+- Audio callbacks from `AVAudioEngine.inputNode.installTap()` run on `RealtimeMessenger.mServiceQueue`
+- Swift 6 strict concurrency detected accessing `@MainActor`-isolated `self` from background thread
+
+### Stack Trace Pattern
+```
+Thread 2 Crashed::  Dispatch queue: RealtimeMessenger.mServiceQueue
+0   libdispatch.dylib    _dispatch_assert_queue_fail
+3   libswift_Concurrency swift_task_isCurrentExecutorWithFlagsImpl
+5   CanvasCode.debug.dylib closure #1 in VoiceInputService.startListening()
+```
+
+### Solution
+1. Removed `@MainActor` from class declaration
+2. Added `@MainActor` to individual public methods that need it
+3. Used `weak var weakSelf = self` pattern instead of `[weak self]` in closures
+4. Used `DispatchQueue.main.async` instead of `Task { @MainActor in }` for UI updates
+
+### Key Insight
+Even `[weak self]` capture of a `@MainActor`-isolated class triggers actor isolation checks when:
+- The closure is created on the main thread
+- The closure is called from a background thread
+
+Using `DispatchQueue.main.async` avoids this because GCD doesn't have the same compile-time actor checking.

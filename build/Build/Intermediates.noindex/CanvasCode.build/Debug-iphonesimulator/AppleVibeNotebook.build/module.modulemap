@@ -1,0 +1,4 @@
+framework module AppleVibeNotebook {
+  header "AppleVibeNotebook-Swift.h"
+  requires objc
+}
