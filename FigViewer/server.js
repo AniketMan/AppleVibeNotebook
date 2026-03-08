@@ -467,3 +467,31 @@ app.listen(PORT, () => {
   console.log("  Press Ctrl+C to stop the server.");
   console.log("");
 });
+
+// ─── Cleanup on exit ────────────────────────────────────────────────────────
+// Clear all temp files (extracted .fig contents, uploads) on shutdown.
+
+function cleanupOnExit() {
+  console.log("\n[Cleanup] Clearing app cache...");
+  try {
+    currentResult = null;
+    currentExtractDir = null;
+    currentFileName = "";
+
+    if (fs.existsSync(UPLOAD_DIR)) {
+      fs.rmSync(UPLOAD_DIR, { recursive: true, force: true });
+      console.log(`[Cleanup] Removed ${UPLOAD_DIR}`);
+    }
+  } catch (err) {
+    console.error("[Cleanup] Error:", err);
+  }
+}
+
+process.on("exit", cleanupOnExit);
+process.on("SIGINT", () => { cleanupOnExit(); process.exit(0); });
+process.on("SIGTERM", () => { cleanupOnExit(); process.exit(0); });
+process.on("uncaughtException", (err) => {
+  console.error("[Cleanup] Uncaught exception:", err);
+  cleanupOnExit();
+  process.exit(1);
+});
