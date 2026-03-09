@@ -1,12 +1,12 @@
 # Distilled Principles: Apple Human Interface
 
-**Author:** Manus AI (JARVIS)
+**Author:** Manus AI
 **Date:** March 08, 2026
 **Version:** 1.0
 
 ## 1.0 Introduction
 
-This document synthesizes the core philosophies and actionable principles from two foundational Apple Worldwide Developers Conference (WWDC) sessions: **"Essential Design Principles" (2017)** and **"Designing Fluid Interfaces" (2018)**. It serves as a quick-reference guide to the fundamental concepts that underpin Apple's human-centered design approach, intended to inform the development of the JARVIS UI.
+This document synthesizes the core philosophies and actionable principles from two foundational Apple Worldwide Developers Conference (WWDC) sessions: **"Essential Design Principles" (2017)** and **"Designing Fluid Interfaces" (2018)**. It serves as a quick-reference guide to the fundamental concepts that underpin Apple's human-centered design approach, intended to inform the development of the UI.
 
 ## 2.0 Essential Design Principles (WWDC 2017)
 
@@ -36,10 +36,10 @@ This session focuses on the physics and feel of interaction, aiming to make the 
 | **Parallel Gesture Recognition** | **Don't wait to decide.** | When multiple gestures are possible (e.g., tap vs. scroll), the system should begin tracking and providing feedback for all of them simultaneously. Once the user's intent becomes clear (e.g., by moving more than the hysteresis distance), the other potential gestures are cancelled. Avoid delays like the one required for double-tap whenever possible. |
 | **Teaching & Play** | **Discover, don't just learn.** | A truly fluid interface is fun to play with. Use visual cues (grabbers, clipping), behavioral hints (animations that mirror gestures), and playful physics to encourage discovery. The "fiddle factor" is a powerful learning tool. |
 
-## 4.0 Synthesis for JARVIS
+## 4.0 Synthesis for the system
 
-- **Fluidity as a Foundation:** The principles from the 2018 talk (Response, Redirection, Dynamic Motion) will define the core *feel* of the JARVIS UI. All interactions must be instantaneous, interruptible, and physically believable.
-- **Essentials as a Structure:** The principles from the 2017 talk (Wayfinding, Feedback, Mental Model) will define the *structure* and *clarity* of the JARVIS UI. The interface must be navigable, communicative, and consistent.
+- **Fluidity as a Foundation:** The principles from the 2018 talk (Response, Redirection, Dynamic Motion) will define the core *feel* of the UI. All interactions must be instantaneous, interruptible, and physically believable.
+- **Essentials as a Structure:** The principles from the 2017 talk (Wayfinding, Feedback, Mental Model) will define the *structure* and *clarity* of the UI. The interface must be navigable, communicative, and consistent.
 - **Liquid Glass as the Medium:** Apple's Liquid Glass framework is the technical implementation of these principles, providing the dynamic lensing, morphing, and material properties that make a fluid, spatially consistent interface possible.
 - **Bio-Harmonization as the Goal:** By mapping these design principles to the research in the *Bio-UI Principles* document, we ensure that the resulting interface is not only fluid and clear, but also physiologically beneficial. Forneficial.
 

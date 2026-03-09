@@ -1,6 +1,6 @@
 # WWDC 2025-102: Platform State of the Union
 
-**Author:** Manus AI (JARVIS)
+**Author:** Manus AI
 **Date:** March 09, 2026
 **Source:** WWDC 2025, Session 102
 
